@@ -28,9 +28,9 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          # Empty for a user site (guru-prasath-j.github.io).
-          # Set to "/<repo-name>" if you publish from any other repo name.
-          BASE_PATH: ""
+          # Project site: served at guru-prasath-j.github.io/guruprasath_portfolio/.
+          # Use "" if this is ever moved to a repo named guru-prasath-j.github.io.
+          BASE_PATH: "/guruprasath_portfolio"
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
