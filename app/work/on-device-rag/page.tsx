@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Pipeline from '@/components/Pipeline';
+import ChunkSplit from '@/components/ChunkSplit';
 import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
 import { caseStudy as cs, featured, isTodo } from '@/lib/content';
@@ -126,6 +127,7 @@ export default function CaseStudy() {
 
             <Section id="implementation" n={3} title="What I built.">
               <Pending text={cs.implementation} />
+              <ChunkSplit />
               <div className="overflow-hidden rounded-[18px] border border-line bg-surface" style={{ transform: 'perspective(1200px) rotateX(4deg)' }}>
                 <div className="flex items-center gap-2 border-b border-line px-4 py-3.5 font-mono text-xs text-faint">
                   <span className="h-2.5 w-2.5 rounded-full bg-line2" /><span className="h-2.5 w-2.5 rounded-full bg-line2" /><span className="h-2.5 w-2.5 rounded-full bg-line2" />

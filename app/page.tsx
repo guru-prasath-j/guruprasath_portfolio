@@ -7,6 +7,10 @@ import ExplodedStack from '@/components/ExplodedStack';
 import TiltCard from '@/components/TiltCard';
 import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
+import Phone3D from '@/components/Phone3D';
+import SkillCube from '@/components/SkillCube';
+import CountUp from '@/components/CountUp';
+import Magnetic from '@/components/Magnetic';
 import { featured, isTodo, journey, lab, numbers, site, stack } from '@/lib/content';
 import { asset } from '@/lib/path';
 
@@ -22,7 +26,9 @@ export default function Home() {
       <Nav />
       <main id="main">
         {/* ---------- Hero ---------- */}
-        <section aria-labelledby="hero-h" className="mx-auto flex max-w-page flex-wrap items-center gap-6 px-5 pb-10 pt-6 sm:px-8 lg:min-h-[760px]">
+        <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="floor" />
+        <section aria-labelledby="hero-h" className="relative mx-auto flex max-w-page flex-wrap items-center gap-6 px-5 pb-10 pt-6 sm:px-8 lg:min-h-[760px]">
           <div className="relative z-10 flex min-w-0 flex-[1_1_520px] flex-col gap-7">
             <p className="inline-flex items-center gap-2.5 self-start rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs text-muted">
               <span className="pulse h-2 w-2 rounded-full bg-live" />
@@ -43,7 +49,7 @@ export default function Home() {
               {site.name} — {site.description.charAt(0).toLowerCase() + site.description.slice(1)}
             </p>
             <div className="word flex flex-wrap gap-3" style={{ animationDelay: '.9s' }}>
-              <a href="#work" className={btnPrimary}>See the work ↓</a>
+              <Magnetic><a href="#work" className={`inline-block ${btnPrimary}`}>See the work ↓</a></Magnetic>
               <a href={asset(site.resume)} className={btnGhost}>Resume</a>
               <a href={site.github} className={btnGhost} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
@@ -52,6 +58,7 @@ export default function Home() {
             <EmbeddingCloud />
           </div>
         </section>
+        </div>
 
         <Marquee items={stack} />
 
@@ -74,7 +81,7 @@ export default function Home() {
               <p className="m-0 text-xl font-medium leading-snug sm:text-[22px]">{featured.line}</p>
               <p className="m-0 text-muted">{featured.meta}</p>
               <div className="mt-2 flex flex-wrap gap-3">
-                <Link href="/work/on-device-rag/" className={btnPrimary}>Read the case study →</Link>
+                <Magnetic><Link href="/work/on-device-rag/" className={`inline-block ${btnPrimary}`}>Read the case study →</Link></Magnetic>
                 {featured.links.map((l) => (
                   <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
                 ))}
@@ -84,6 +91,28 @@ export default function Home() {
               <ExplodedStack />
             </div>
           </article>
+        </section>
+
+        {/* ---------- On the phone ---------- */}
+        <section aria-labelledby="phone-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
+          <div className="flex flex-wrap items-center gap-10">
+            <div className="reveal flex min-w-0 flex-[1_1_380px] flex-col gap-5">
+              <div className="flex items-center gap-2.5">
+                <StatusBadge status="Prototype" />
+                <span className="font-mono text-xs text-faint">PocketMind</span>
+              </div>
+              <h2 id="phone-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+                Answers in<br /><span className="text-dim">airplane mode.</span>
+              </h2>
+              <p className="m-0 max-w-[460px] text-muted">
+                A quantized model and an on-device index, so questions about private documents never touch a server. Move your cursor to turn the phone.
+              </p>
+              <p className="m-0 font-mono text-xs text-faint">Illustrative replay of the prototype’s chat flow.</p>
+            </div>
+            <div className="min-w-0 flex-[1_1_420px]">
+              <Phone3D />
+            </div>
+          </div>
         </section>
 
         {/* ---------- Lab ---------- */}
@@ -101,7 +130,7 @@ export default function Home() {
                   <span aria-hidden="true" className="font-mono text-6xl font-medium leading-none text-[#1E2232]">{String(i + 1).padStart(2, '0')}</span>
                   <StatusBadge status={p.status} />
                 </div>
-                <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]">{p.name}</h3>
+                <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]"><span className="sweep">{p.name}</span></h3>
                 <p className="m-0 text-lg font-medium leading-snug">{p.line}</p>
                 <p className="m-0 text-[15px] text-muted">{p.meta}</p>
                 <div className="mt-auto flex gap-5">
@@ -114,13 +143,28 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ---------- Toolkit ---------- */}
+        <section aria-labelledby="tk-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
+          <div className="flex flex-wrap items-center gap-10">
+            <div className="min-w-0 flex-[1_1_420px]"><SkillCube /></div>
+            <div className="reveal flex min-w-0 flex-[1_1_380px] flex-col gap-5">
+              <h2 id="tk-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+                Six sides<br /><span className="text-dim">of one stack.</span>
+              </h2>
+              <p className="m-0 max-w-[460px] text-muted">
+                Flutter and Dart on the surface, retrieval and quantized models underneath, FastAPI and MCP when the work needs a server or an agent.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ---------- Numbers ---------- */}
         <section aria-label="Results" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
           <div className="reveal grid grid-cols-1 gap-6 sm:grid-cols-3">
             {numbers.map((n) => (
               <div key={n.label} className="border-t border-line2 pt-6">
                 <div className="text-6xl font-semibold leading-none tracking-[-0.05em] sm:text-[72px]">
-                  {n.value}<span className="text-accent">{n.unit}</span>
+                  <CountUp value={n.value} /><span className="text-accent">{n.unit}</span>
                 </div>
                 <p className="m-0 mt-2.5 text-muted">{n.label}</p>
               </div>
@@ -133,7 +177,8 @@ export default function Home() {
           <h2 id="j-h" className="reveal m-0 mb-12 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
             Journey<span className="text-accent">.</span>
           </h2>
-          <ol className="m-0 flex list-none flex-col gap-12 border-l border-line2 py-0 pl-8 pr-0">
+          <ol className="relative m-0 flex list-none flex-col gap-12 border-l border-line2 py-0 pl-8 pr-0">
+            <span aria-hidden="true" className="journey-line absolute -left-px top-0 h-full w-px bg-accent" />
             {journey.map((r) => (
               <li key={r.title} className="reveal relative">
                 <span
@@ -156,7 +201,7 @@ export default function Home() {
               Let’s build<br /><span className="text-accent">something smart.</span>
             </h2>
             <div className="flex flex-wrap items-center gap-3.5">
-              <a href={`mailto:${site.email}`} className="rounded-2xl bg-ink px-7 py-4 text-lg font-semibold text-bg no-underline">{site.email}</a>
+              <Magnetic strength={0.2}><a href={`mailto:${site.email}`} className="inline-block rounded-2xl bg-ink px-7 py-4 text-lg font-semibold text-bg no-underline">{site.email}</a></Magnetic>
               <a href={site.linkedin} className={btnGhost} target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href={site.github} className={btnGhost} target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href={asset(site.resume)} className={btnGhost}>Resume</a>

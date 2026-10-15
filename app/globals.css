@@ -4,7 +4,7 @@
 
 :root { color-scheme: dark; }
 html { scroll-behavior: smooth; background: #07080C; }
-body { @apply bg-bg text-ink font-sans antialiased; overflow-x: hidden; }
+body { @apply text-ink font-sans antialiased; background: transparent; overflow-x: hidden; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid #8C97FF; outline-offset: 3px; border-radius: 6px; }
 ::selection { background: #8C97FF; color: #07080C; }
@@ -79,4 +79,51 @@ a { color: inherit; }
   .word, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
   .marquee, .pulse, .caret, .stack, .plane, .step, .packet, .orbit, .tilt { animation: none !important; }
   .layer, .tilt, .lift { transition: none !important; }
+}
+
+/* ---------- hero: perspective grid floor ---------- */
+@keyframes floor { from { background-position: 0 0; } to { background-position: 0 64px; } }
+.floor {
+  position: absolute; left: -25%; right: -25%; bottom: -10%; height: 70%;
+  transform: perspective(600px) rotateX(72deg); transform-origin: 50% 100%;
+  background-image: linear-gradient(#1E2130 1px, transparent 1px), linear-gradient(90deg, #1E2130 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+          mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+  animation: floor 3s linear infinite;
+}
+
+/* ---------- phone ---------- */
+@keyframes bubble { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+.bubble-in { animation: bubble .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes glare { 0%,100% { transform: translateX(-120%) rotate(18deg); } 50% { transform: translateX(120%) rotate(18deg); } }
+.glare::after { content: ''; position: absolute; inset: -40% -60%; background: linear-gradient(90deg, transparent 40%, rgba(255,255,255,.35) 50%, transparent 60%); animation: glare 7s ease-in-out infinite; }
+
+/* ---------- magnetic buttons ---------- */
+.magnetic { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+
+/* ---------- chunking ---------- */
+@keyframes chunk {
+  0%, 12% { transform: translate3d(0,0,0); opacity: 1; }
+  40%, 62% { transform: translate3d(var(--dx), 0, var(--dz)) rotateY(-12deg); opacity: 1; }
+  85% { transform: translate3d(0, -40px, 260px) scale(.4); opacity: 0; }
+  100% { transform: translate3d(0,0,0); opacity: 1; }
+}
+.chunk { animation: chunk 5.2s cubic-bezier(.6,.05,.3,1) infinite; }
+
+/* ---------- journey line draws as you scroll ---------- */
+.journey-line { transform-origin: 0 0; }
+@keyframes draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@supports (animation-timeline: view()) {
+  .journey-line { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% cover 70%; }
+}
+
+/* ---------- heading underline sweep on hover ---------- */
+.sweep { background: linear-gradient(#8C97FF, #8C97FF) 0 100% / 0 2px no-repeat; transition: background-size .5s cubic-bezier(.2,.7,.2,1); }
+.sweep:hover { background-size: 100% 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .floor, .bubble-in, .glare::after, .chunk, .journey-line { animation: none !important; }
+  .journey-line { transform: none !important; }
+  .magnetic { transition: none !important; transform: none !important; }
 }

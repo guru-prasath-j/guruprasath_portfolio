@@ -5,7 +5,9 @@ Personal portfolio of **Guruprasath J**, AI Mobile Engineer. It's a dark, motion
 - a live **3D embedding space** in the hero. It's drawn on a 2D canvas (no WebGL), and a query point retrieves its top-5 neighbours.
 - an **exploded 3D stack** for `on_device_rag`. Hover over it on desktop, or tap the button on touch screens.
 - **tilt-to-cursor** project cards, a scrolling stack marquee, and CSS-only scroll reveals.
-- a case-study page with a **3D animated pipeline** and a reading-progress bar.
+- a **3D phone** with real thickness that turns with your cursor and streams an on-device chat answer token by token.
+- a draggable **3D skill cube** with momentum, a perspective **grid floor** under the hero, a cursor glow, magnetic buttons, numbers that count up, and a journey line that draws as you scroll.
+- a case-study page with a **3D chunking animation**, a **3D animated pipeline** and a reading-progress bar.
 
 All motion stops when the visitor's device asks for reduced motion. Without JavaScript, the content still renders fully.
 
