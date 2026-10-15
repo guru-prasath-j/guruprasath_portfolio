@@ -2,14 +2,14 @@
 
 Personal portfolio of **Guruprasath J**, AI Mobile Engineer. It's a dark, motion-led site with:
 
-- a live **3D embedding space** in the hero. It's drawn on a 2D canvas (no WebGL), and a query point retrieves its top-5 neighbours.
-- an **exploded 3D stack** for `on_device_rag`. Hover over it on desktop, or tap the button on touch screens.
-- **tilt-to-cursor** project cards, a scrolling stack marquee, and CSS-only scroll reveals.
-- a **3D phone** with real thickness that turns with your cursor and streams an on-device chat answer token by token.
-- a draggable **3D skill cube** with momentum, a perspective **grid floor** under the hero, a cursor glow, magnetic buttons, numbers that count up, and a journey line that draws as you scroll.
-- a case-study page with a **3D chunking animation**, a **3D animated pipeline** and a reading-progress bar.
+- a **particle sculpture** hero: about 2,400 points morph between "AI", a phone, a neural network, a chat bubble, a spinning wireframe globe and "GP". It autoplays every 5 seconds, has play/pause and shape buttons, moves aside when you push it with the cursor, and scatters when you click.
+- a **headline with real depth**. It tilts toward the cursor, and its extrusion falls away from it as if the cursor were a light.
+- a **working 3D stack** for `on_device_rag`: a scanned vector store, the top-5 matches glowing, beams carrying them up through context and model to the Flutter screen. It breathes on its own, opens on hover, and has a "Hold it open" button.
+- a **custom cursor** (dot plus ring) that shows *drag*, *turn*, *play*, *view* or *explode* over interactive pieces, and a **click burst** of points on every click.
+- a **3D phone** that streams an on-device chat answer, a draggable **3D skill cube**, lab cards that **flip up in 3D** and tilt to the cursor, a perspective grid floor, a cursor glow, magnetic buttons and counting numbers.
+- a case study with a **3D chunking scene**, a **3D animated pipeline** and a reading-progress bar.
 
-All motion stops when the visitor's device asks for reduced motion. Without JavaScript, the content still renders fully.
+All motion stops when the visitor's device asks for reduced motion (the hero starts paused, with ▶ to play). The custom cursor only appears on devices with a mouse. Without JavaScript, the content still renders fully.
 
 **Stack:** Next.js 14 (App Router, static export), TypeScript, Tailwind CSS, Vitest. There's no animation library; motion is CSS plus one canvas.
 

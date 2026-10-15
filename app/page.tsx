@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Marquee from '@/components/Marquee';
-import EmbeddingCloud from '@/components/EmbeddingCloud';
+import ParticleSculpture from '@/components/ParticleSculpture';
+import LitHeadline from '@/components/LitHeadline';
 import ExplodedStack from '@/components/ExplodedStack';
 import TiltCard from '@/components/TiltCard';
 import StatusBadge from '@/components/StatusBadge';
@@ -14,13 +15,10 @@ import Magnetic from '@/components/Magnetic';
 import { featured, isTodo, journey, lab, numbers, site, stack } from '@/lib/content';
 import { asset } from '@/lib/path';
 
-const HEADLINE = [['I', 'put', 'AI'], ['inside', 'the'], ['phone', 'in', 'your', 'hand.']];
-
 const btnPrimary = 'rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg no-underline transition-transform hover:-translate-y-0.5';
 const btnGhost = 'rounded-xl border border-line2 px-6 py-3.5 font-medium no-underline transition-colors hover:border-accent';
 
 export default function Home() {
-  let d = 0;
   return (
     <>
       <Nav />
@@ -34,17 +32,7 @@ export default function Home() {
               <span className="pulse h-2 w-2 rounded-full bg-live" />
               {site.availability} · {site.location}
             </p>
-            <h1 id="hero-h" className="m-0 text-[46px] font-semibold leading-[0.98] tracking-[-0.045em] sm:text-[80px]">
-              {HEADLINE.map((line, li) => (
-                <span key={li} className="block">
-                  {line.map((w) => (
-                    <span key={w} className={`word ${w === 'AI' ? 'text-accent' : ''}`} style={{ animationDelay: `${(d += 0.07)}s` }}>
-                      {w}&nbsp;
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </h1>
+            <LitHeadline id="hero-h" />
             <p className="word m-0 max-w-[520px] text-lg leading-relaxed text-muted sm:text-[19px]" style={{ animationDelay: '.75s' }}>
               {site.name} — {site.description.charAt(0).toLowerCase() + site.description.slice(1)}
             </p>
@@ -54,8 +42,8 @@ export default function Home() {
               <a href={site.github} className={btnGhost} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
-          <div className="h-[360px] min-w-0 flex-[1_1_520px] sm:h-[620px]">
-            <EmbeddingCloud />
+          <div className="h-[460px] min-w-0 flex-[1_1_520px] sm:h-[620px]">
+            <ParticleSculpture />
           </div>
         </section>
         </div>
@@ -68,7 +56,7 @@ export default function Home() {
             <h2 id="work-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
               Featured<br /><span className="text-dim">build.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">Pull the stack apart to see the layers I built, from the Flutter screen down to the vector store.</p>
+            <p className="m-0 max-w-[380px] text-muted">The stack breathes on its own. Hover it and it pulls fully apart — watch the top-5 matches rise from the vector store to the screen.</p>
           </div>
 
           <article aria-labelledby="p1" className="reveal flex flex-wrap items-center gap-10 overflow-hidden rounded-[28px] border border-line bg-surface p-6 sm:p-12">
@@ -125,7 +113,8 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {lab.map((p, i) => (
-              <TiltCard key={p.slug} className="reveal flex min-h-[300px] flex-col gap-4 rounded-3xl border border-line bg-surface p-6 sm:p-8">
+              <div key={p.slug} className="reveal-3d flex">
+              <TiltCard className="flex min-h-[300px] flex-1 flex-col gap-4 rounded-3xl border border-line bg-surface p-6 sm:p-8">
                 <div className="flex items-center justify-between">
                   <span aria-hidden="true" className="font-mono text-6xl font-medium leading-none text-[#1E2232]">{String(i + 1).padStart(2, '0')}</span>
                   <StatusBadge status={p.status} />
@@ -139,6 +128,7 @@ export default function Home() {
                   ))}
                 </div>
               </TiltCard>
+              </div>
             ))}
           </div>
         </section>

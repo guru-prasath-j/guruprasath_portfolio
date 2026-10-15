@@ -127,3 +127,34 @@ a { color: inherit; }
   .journey-line { transform: none !important; }
   .magnetic { transition: none !important; transform: none !important; }
 }
+
+/* ---------- exploded stack ---------- */
+@keyframes scan { 0% { top: 6%; } 100% { top: 94%; } }
+.scan { animation: scan 2.6s cubic-bezier(.5,0,.5,1) infinite alternate; }
+@keyframes blip { 0%,100% { opacity: .25; transform: scale(1); } 50% { opacity: 1; transform: scale(1.8); } }
+.blip { animation: blip 2.4s ease-in-out infinite; }
+@keyframes halo { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.4); opacity: 0; } }
+.halo { animation: halo 1.8s ease-out infinite; }
+@keyframes rise { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.rise { animation: rise 1.4s linear infinite; }
+@keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
+.shim { background: linear-gradient(90deg,#3B4377 0%,#8C97FF 50%,#3B4377 100%); background-size: 200px 100%; animation: shimmer 1.6s linear infinite; }
+
+/* ---------- lab cards flip up in 3D (on a wrapper, so the tilt still works) ---------- */
+@keyframes rv3k { from { opacity: 0; transform: perspective(1000px) rotateX(38deg) translateY(90px) translateZ(-140px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal-3d { animation: rv3k linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+}
+
+/* ---------- custom cursor + press feedback ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor, html.has-cursor * { cursor: none !important; }
+}
+.cursor-ring { transition: width .3s cubic-bezier(.2,.7,.2,1), height .3s cubic-bezier(.2,.7,.2,1), background-color .3s, border-color .3s, opacity .3s; }
+.cursor-part { will-change: transform; }
+a:active, button:active { transform: scale(.96); }
+
+@media (prefers-reduced-motion: reduce) {
+  .scan, .blip, .halo, .rise, .shim, .reveal-3d { animation: none !important; opacity: 1 !important; }
+  a:active, button:active { transform: none; }
+}

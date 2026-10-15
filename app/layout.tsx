@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { site } from '@/lib/content';
 import CursorGlow from '@/components/CursorGlow';
+import CustomCursor from '@/components/CustomCursor';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <CursorGlow />
+        <CustomCursor />
         {children}
       </body>
     </html>

@@ -38,6 +38,7 @@ export default function SkillCube({ size = 220 }: { size?: number }) {
   return (
     <div className="flex flex-col items-center gap-5">
       <div
+        data-cursor="drag"
         role="img"
         aria-label="A 3D cube with faces for Flutter, Dart, RAG, TFLite, FastAPI and MCP. Drag to spin it."
         className="cursor-grab touch-none select-none active:cursor-grabbing"

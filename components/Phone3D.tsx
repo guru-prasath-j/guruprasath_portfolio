@@ -57,6 +57,7 @@ export default function Phone3D() {
 
   return (
     <div
+      data-cursor="turn"
       className="flex h-[640px] w-full items-center justify-center"
       style={{ perspective: 1600 }}
       onPointerMove={(e) => {

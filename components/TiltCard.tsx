@@ -10,6 +10,7 @@ export default function TiltCard({ children, className = '' }: { children: React
   return (
     <article
       ref={ref}
+      data-cursor="view"
       className={`tilt ${className}`}
       onMouseMove={(e) => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
