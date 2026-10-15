@@ -24,7 +24,8 @@ const config: Config = {
         sans: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
-      maxWidth: { page: '1240px' },
+      // Scales with the screen: 1240px floor, ~90% of the viewport on wide screens, capped for ultra-wide.
+      maxWidth: { page: 'clamp(1240px, 90vw, 2000px)' },
     },
   },
   plugins: [],
