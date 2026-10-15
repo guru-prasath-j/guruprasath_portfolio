@@ -26,7 +26,8 @@ export const site = {
   handle: 'guru.prasath',
   role: 'AI Mobile Engineer',
   location: 'Bengaluru',
-  url: 'https://guru-prasath-j.github.io',
+  // Must match where Pages serves the site (BASE_PATH in .github/workflows/deploy.yml).
+  url: 'https://guru-prasath-j.github.io/guruprasath_portfolio',
   email: 'guruprasathjay@gmail.com',
   github: 'https://github.com/guru-prasath-j',
   linkedin: 'https://www.linkedin.com/in/guruprasath-j/',

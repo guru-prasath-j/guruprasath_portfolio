@@ -35,11 +35,18 @@ All copy, links and projects live in [`lib/content.ts`](lib/content.ts).
 
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds, type-checks, tests and publishes on every push to `main`.
 
-1. Create the repo **`guru-prasath-j.github.io`**, so the site lives at `https://guru-prasath-j.github.io`.
-2. Push this code to `main`.
-3. In the repo, go to **Settings → Pages → Source** and select **GitHub Actions**.
+The site lives at **https://guru-prasath-j.github.io/guruprasath_portfolio/**. It's a project site, so the workflow builds with `BASE_PATH=/guruprasath_portfolio`, and `site.url` in `lib/content.ts` matches.
 
-**Using a different repo name** (for example `portfolio`): set `BASE_PATH: "/portfolio"` in the workflow, and change `site.url` in `lib/content.ts` to match.
+One-time setup: in the repo, go to **Settings → Pages → Source** and select **GitHub Actions**.
+
+**Moving to a user site:** if you move the code to a repo named `guru-prasath-j.github.io`, set `BASE_PATH: ""` in the workflow and `site.url` to `https://guru-prasath-j.github.io`.
+
+To try the sub-path build locally:
+
+```bash
+BASE_PATH=/guruprasath_portfolio npm run build
+npx serve out   # then open the URL it prints + /guruprasath_portfolio/
+```
 
 ## Structure
 
