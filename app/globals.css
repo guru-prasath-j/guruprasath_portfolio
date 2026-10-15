@@ -158,3 +158,11 @@ a:active, button:active { transform: scale(.96); }
   .scan, .blip, .halo, .rise, .shim, .reveal-3d { animation: none !important; opacity: 1 !important; }
   a:active, button:active { transform: none; }
 }
+
+/* ---------- journey staircase ---------- */
+@keyframes stairsfloat {
+  0%,100% { transform: rotateX(56deg) rotateZ(-38deg) translate(-40px, 60px); }
+  50% { transform: rotateX(54deg) rotateZ(-34deg) translate(-40px, 60px) translateZ(14px); }
+}
+.stairs { transform: rotateX(56deg) rotateZ(-38deg) translate(-40px, 60px); animation: stairsfloat 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .stairs { animation: none !important; } }

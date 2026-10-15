@@ -22,6 +22,11 @@ describe('content', () => {
     for (const h of hrefs) expect(isTodo(h) || /^(https:\/\/|mailto:|\/)/.test(h)).toBe(true);
   });
 
+  it('journey has exactly one current role and ends on the open step', () => {
+    expect(journey.filter((r) => r.current)).toHaveLength(1);
+    expect(journey[journey.length - 1].kind).toBe('Next');
+  });
+
   it('no invented metrics: case-study numbers are either measured or null', () => {
     for (const m of caseStudy.metrics) expect(m.value === null || typeof m.value === 'string').toBe(true);
   });
@@ -29,7 +34,7 @@ describe('content', () => {
   it('lists remaining placeholders (informational)', () => {
     const todos = [
       ...projects.flatMap((p) => p.links.filter((l) => isTodo(l.href)).map((l) => `${p.name}: ${l.href}`)),
-      ...journey.filter((r) => r.body && isTodo(r.body)).map((r) => `${r.title}: ${r.body}`),
+      ...journey.flatMap((r) => r.points.filter(isTodo).map((t) => `${r.org}: ${t}`)),
       ...[caseStudy.timeline, caseStudy.implementation, caseStudy.reliability].filter(isTodo),
     ];
     if (todos.length) console.info(`\n${todos.length} placeholder(s) left:\n- ${todos.join('\n- ')}`);

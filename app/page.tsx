@@ -12,7 +12,8 @@ import Phone3D from '@/components/Phone3D';
 import SkillCube from '@/components/SkillCube';
 import CountUp from '@/components/CountUp';
 import Magnetic from '@/components/Magnetic';
-import { featured, isTodo, journey, lab, numbers, site, stack } from '@/lib/content';
+import JourneyStairs from '@/components/JourneyStairs';
+import { featured, lab, numbers, site, stack } from '@/lib/content';
 import { asset } from '@/lib/path';
 
 const btnPrimary = 'rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg no-underline transition-transform hover:-translate-y-0.5';
@@ -164,23 +165,13 @@ export default function Home() {
 
         {/* ---------- Journey ---------- */}
         <section id="journey" aria-labelledby="j-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
-          <h2 id="j-h" className="reveal m-0 mb-12 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
-            Journey<span className="text-accent">.</span>
-          </h2>
-          <ol className="relative m-0 flex list-none flex-col gap-12 border-l border-line2 py-0 pl-8 pr-0">
-            <span aria-hidden="true" className="journey-line absolute -left-px top-0 h-full w-px bg-accent" />
-            {journey.map((r) => (
-              <li key={r.title} className="reveal relative">
-                <span
-                  aria-hidden="true"
-                  className={`absolute -left-[39px] top-2 h-[13px] w-[13px] rounded-full ${r.current ? 'bg-accent shadow-[0_0_0_6px_#161A33]' : 'bg-dim'}`}
-                />
-                <p className="m-0 font-mono text-[13px] text-faint">{r.when} · {r.where}</p>
-                <h3 className="my-1.5 text-2xl font-semibold tracking-[-0.02em] sm:text-[28px]">{r.title}</h3>
-                {r.body && !isTodo(r.body) && <p className="m-0 max-w-[720px] text-muted">{r.body}</p>}
-              </li>
-            ))}
-          </ol>
+          <div className="reveal mb-6 flex flex-wrap items-end justify-between gap-5">
+            <h2 id="j-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+              Journey<span className="text-accent">.</span><br /><span className="text-dim">One step at a time.</span>
+            </h2>
+            <p className="m-0 max-w-[380px] text-muted">Each step is a stage of the climb. Pick one to see what I did there — the open step at the top is the next one.</p>
+          </div>
+          <JourneyStairs />
         </section>
 
         {/* ---------- Contact ---------- */}

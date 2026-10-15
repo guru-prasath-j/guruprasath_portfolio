@@ -6,7 +6,7 @@ Personal portfolio of **Guruprasath J**, AI Mobile Engineer. It's a dark, motion
 - a **headline with real depth**. It tilts toward the cursor, and its extrusion falls away from it as if the cursor were a light.
 - a **working 3D stack** for `on_device_rag`: a scanned vector store, the top-5 matches glowing, beams carrying them up through context and model to the Flutter screen. It breathes on its own, opens on hover, and has a "Hold it open" button.
 - a **custom cursor** (dot plus ring) that shows *drag*, *turn*, *play*, *view* or *explode* over interactive pieces, and a **click burst** of points on every click.
-- a **3D phone** that streams an on-device chat answer, a draggable **3D skill cube**, lab cards that **flip up in 3D** and tilt to the cursor, a perspective grid floor, a cursor glow, magnetic buttons and counting numbers.
+- a **3D phone** that streams an on-device chat answer, a draggable **3D skill cube**, lab cards that **flip up in 3D** and tilt to the cursor, a perspective grid floor, a cursor glow, magnetic buttons and counting numbers, and a **3D career staircase** for the journey (the top step is left open for the next team).
 - a case study with a **3D chunking scene**, a **3D animated pipeline** and a reading-progress bar.
 
 All motion stops when the visitor's device asks for reduced motion (the hero starts paused, with ▶ to play). The custom cursor only appears on devices with a mouse. Without JavaScript, the content still renders fully.

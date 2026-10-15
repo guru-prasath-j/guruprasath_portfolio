@@ -97,29 +97,76 @@ export const numbers = [
   { value: '160', unit: '/160', label: 'Pub points on offline_cache_sync' },
 ];
 
-export interface Role {
+export type StepKind = 'Education' | 'Work' | 'Next';
+
+export interface Step {
+  kind: StepKind;
+  current?: boolean;
+  /** Big label on the top of the step. */
+  year: string;
+  /** Small label under the year. */
+  short: string;
   when: string;
   where: string;
   title: string;
-  body?: string;
-  current?: boolean;
+  org: string;
+  body: string;
+  /** Highlight tiles. TODO() entries are hidden until filled in. */
+  points: string[];
+  tags: string[];
 }
 
-export const journey: Role[] = [
+// Bottom step first. The last step is the open one: the role you're looking for.
+export const journey: Step[] = [
   {
-    when: 'Oct 2025 → now',
-    where: 'Bengaluru',
-    title: 'SDE-1, Flutter & AI Mobile — Nuvo.ai',
-    body: 'Building the HealthJini doctor app and Business Jini for Meril Life Sciences’ digital arm. Native Kotlin and Swift plugins, offline-first data, and a 150 → 80 MB size cut.',
-    current: true,
+    kind: 'Education',
+    year: '2024',
+    short: 'B.E. CSE',
+    when: 'Graduated 2024',
+    where: 'Vellore',
+    title: 'B.E. Computer Science',
+    org: 'Annai Mira College of Engineering',
+    body: 'Where it started — computer science fundamentals, and the first Flutter apps I built end to end.',
+    points: [TODO('final-year project'), TODO('award, rank or club')],
+    tags: ['CS fundamentals', 'Flutter', 'Dart'],
   },
   {
+    kind: 'Work',
+    year: '2024',
+    short: 'Thinq24',
     when: 'Jul 2024 → Sep 2025',
     where: 'Chennai',
-    title: 'Flutter Engineer — Thinq24 Innovations',
-    body: TODO('one line on what you shipped at Thinq24'),
+    title: 'Flutter Engineer',
+    org: 'Thinq24 Innovations',
+    body: 'First professional role: shipping Flutter apps to real users.',
+    points: [TODO('shipped feature + outcome'), TODO('shipped feature + outcome'), '1 yr 3 mo'],
+    tags: ['Flutter', 'Dart'],
   },
-  { when: '2024', where: 'Vellore', title: 'B.E. Computer Science — Annai Mira College' },
+  {
+    kind: 'Work',
+    current: true,
+    year: '2025',
+    short: 'Nuvo.ai',
+    when: 'Oct 2025 → now',
+    where: 'Bengaluru',
+    title: 'SDE-1, Flutter & AI Mobile',
+    org: 'Nuvo.ai · Meril Life Sciences',
+    body: 'Building the HealthJini doctor app and Business Jini for Meril Life Sciences’ digital arm, with native plugins and offline-first data.',
+    points: ['App size 150 → 80 MB', 'HealthJini doctor app', 'Business Jini', 'Kotlin + Swift plugins'],
+    tags: ['Flutter', 'Kotlin', 'Swift', 'Offline-first'],
+  },
+  {
+    kind: 'Next',
+    year: 'You?',
+    short: 'Your team',
+    when: 'Open now',
+    where: 'Bengaluru · remote · abroad',
+    title: 'AI Mobile Engineer',
+    org: 'Your team?',
+    body: 'The next step is open. I’m looking for a team building AI into mobile products — on-device models, RAG and the apps around them.',
+    points: ['On-device AI', 'RAG in production', 'Flutter at scale', 'Ship fast, measure'],
+    tags: ['Let’s talk'],
+  },
 ];
 
 export const caseStudy = {
