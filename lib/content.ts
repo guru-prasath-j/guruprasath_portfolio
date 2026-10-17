@@ -38,7 +38,7 @@ export const site = {
   resume: '/Guruprasath_J_Resume.pdf',
   availability: 'Open to AI-mobile roles',
   description:
-    'Flutter engineer building on-device RAG, quantized LLMs and the Dart infrastructure that makes private, offline AI feel instant.',
+    'AI Mobile Engineer building on-device RAG, quantized LLMs and the Flutter and Dart infrastructure that makes private, offline AI feel instant.',
 };
 
 export const stack = ['Flutter', 'Dart', 'On-device RAG', 'TFLite', 'Quantized LLMs', 'LangGraph', 'FastAPI', 'MCP', 'Kotlin · Compose', 'Swift · SwiftUI'];
