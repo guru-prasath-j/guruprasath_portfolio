@@ -9,11 +9,12 @@ import TiltCard from '@/components/TiltCard';
 import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
 import Phone3D from '@/components/Phone3D';
+import ScannerScreen from '@/components/ScannerScreen';
 import SkillCube from '@/components/SkillCube';
 import CountUp from '@/components/CountUp';
 import Magnetic from '@/components/Magnetic';
 import JourneyStairs from '@/components/JourneyStairs';
-import { builds, featured, lab, numbers, pocketmind, site, stack, writing } from '@/lib/content';
+import { builds, featured, lab, numbers, site, spotlight, stack, writing } from '@/lib/content';
 import { asset } from '@/lib/path';
 
 const btnPrimary = 'rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg no-underline transition-transform hover:-translate-y-0.5';
@@ -82,25 +83,38 @@ export default function Home() {
           </article>
         </section>
 
-        {/* ---------- On the phone ---------- */}
+        {/* ---------- Spotlight: accessibility scanner ---------- */}
         <section aria-labelledby="phone-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
           <div className="flex flex-wrap items-center gap-10">
             <div className="reveal flex min-w-0 flex-[1_1_380px] flex-col gap-5">
               <div className="flex items-center gap-2.5">
-                <StatusBadge status="Prototype" />
-                <span className="font-mono text-xs text-faint">PocketMind</span>
+                <StatusBadge status={spotlight.status} />
+                <span className="font-mono text-xs text-faint">{spotlight.registry}</span>
               </div>
               <h2 id="phone-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
-                Answers in<br /><span className="text-dim">airplane mode.</span>
+                Used in other<br /><span className="text-dim">people’s apps.</span>
               </h2>
-              <p className="m-0 max-w-[460px] text-muted">
-                A quantized model and an on-device index, so questions about private documents never touch a server. Move your cursor to turn the phone.
-              </p>
-              <p className="m-0 font-mono text-xs text-faint">Illustrative replay of the prototype’s chat flow.</p>
-              <SmartLink href={pocketmind.repo} className="self-start font-semibold text-accent no-underline hover:underline">See the prototype on GitHub →</SmartLink>
+              <p className="m-0 font-mono text-base text-soft sm:text-lg">{spotlight.name}</p>
+              <p className="m-0 max-w-[520px] text-xl font-medium leading-snug">{spotlight.line}</p>
+              <p className="m-0 max-w-[520px] text-muted">{spotlight.meta}</p>
+              <dl className="m-0 grid max-w-[520px] grid-cols-3 gap-4">
+                {spotlight.stats.map((st) => (
+                  <div key={st.label} className="flex flex-col-reverse border-t border-line2 pt-3">
+                    <dt className="text-sm text-muted">{st.label}</dt>
+                    <dd className="m-0 text-4xl font-semibold tracking-[-0.04em]"><CountUp value={st.value} /></dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-1 flex flex-wrap gap-3">
+                <Magnetic><a href={spotlight.article} target="_blank" rel="noopener noreferrer" className={`inline-block ${btnPrimary}`}>Read the story →</a></Magnetic>
+                {spotlight.links.map((l) => (
+                  <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
+                ))}
+              </div>
+              <p className="m-0 font-mono text-xs text-faint">Illustrative replay of the in-app overlay. Move your cursor to turn the phone.</p>
             </div>
             <div className="min-w-0 flex-[1_1_420px]">
-              <Phone3D />
+              <Phone3D><ScannerScreen /></Phone3D>
             </div>
           </div>
         </section>
@@ -113,7 +127,7 @@ export default function Home() {
             </h2>
             <p className="m-0 max-w-[380px] text-muted">Open-source packages and tools other developers install. Move your cursor over a card.</p>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {lab.map((p, i) => (
               <div key={p.slug} className="reveal-3d flex">
               <TiltCard className="flex min-h-[300px] flex-1 flex-col gap-4 rounded-3xl border border-line bg-surface p-6 sm:p-8">

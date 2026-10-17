@@ -96,6 +96,8 @@ a { color: inherit; }
 /* ---------- phone ---------- */
 @keyframes bubble { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
 .bubble-in { animation: bubble .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes scan { from { transform: translateY(0); opacity: 1; } to { transform: translateY(320px); opacity: 0; } }
+.scanline { animation: scan 1.6s ease-in both; }
 @keyframes glare { 0%,100% { transform: translateX(-120%) rotate(18deg); } 50% { transform: translateX(120%) rotate(18deg); } }
 .glare::after { content: ''; position: absolute; inset: -40% -60%; background: linear-gradient(90deg, transparent 40%, rgba(255,255,255,.35) 50%, transparent 60%); animation: glare 7s ease-in-out infinite; }
 
@@ -123,7 +125,7 @@ a { color: inherit; }
 .sweep:hover { background-size: 100% 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .floor, .bubble-in, .glare::after, .chunk, .journey-line { animation: none !important; }
+  .floor, .bubble-in, .scanline, .glare::after, .chunk, .journey-line { animation: none !important; }
   .journey-line { transform: none !important; }
   .magnetic { transition: none !important; transform: none !important; }
 }

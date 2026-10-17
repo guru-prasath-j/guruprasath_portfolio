@@ -57,18 +57,6 @@ export const featured: Project = {
 
 export const lab: Project[] = [
   {
-    slug: 'flutter-accessibility-scanner',
-    name: 'flutter_accessibility_scanner',
-    status: 'Live',
-    registry: 'pub.dev',
-    line: 'Catches WCAG 2.1 failures before your users do.',
-    meta: 'Walks the live render tree for missing labels, low contrast, small tap targets and unfocusable controls · in-app overlay, widget-test check or CI report · ~15k downloads a month',
-    links: [
-      { label: 'View package', href: 'https://pub.dev/packages/flutter_accessibility_scanner' },
-      { label: 'GitHub', href: 'https://github.com/guru-prasath-j/flutter_accessibility_scanner' },
-    ],
-  },
-  {
     slug: 'offline-cache-sync',
     name: 'offline_cache_sync',
     status: 'Live',
@@ -130,6 +118,15 @@ export const builds: Project[] = [
     links: [{ label: 'GitHub', href: 'https://github.com/guru-prasath-j/brainsync-ai-app' }],
   },
   {
+    slug: 'pocketmind',
+    name: 'PocketMind',
+    status: 'Prototype',
+    line: 'A study assistant that answers from your notes in airplane mode.',
+    meta: 'A quantized LLM and a local vector store over SQLite, both on the phone: chunk, embed, retrieve and answer with zero network calls.',
+    tags: ['Flutter', 'On-device LLM', 'GGUF · TFLite', 'SQLite'],
+    links: [{ label: 'GitHub', href: 'https://github.com/guru-prasath-j/pocketmind' }],
+  },
+  {
     slug: 'ai-code-review-agent',
     name: 'AI code review agent',
     status: 'Prototype',
@@ -156,18 +153,26 @@ export const builds: Project[] = [
     tags: ['Flutter', 'FastAPI', 'Ollama', 'OAuth2'],
     links: [{ label: 'GitHub', href: 'https://github.com/guru-prasath-j/gmail-ai-assistant' }],
   },
-  {
-    slug: 'whatsapp-brain',
-    name: 'WhatsApp Brain',
-    status: 'Prototype',
-    line: 'Answers customers on WhatsApp from your own business documents.',
-    meta: 'Drop in PDFs or notes, and a RAG engine behind a FastAPI webhook replies through the WhatsApp Cloud API.',
-    tags: ['FastAPI', 'RAG', 'ChromaDB', 'WhatsApp API'],
-    links: [{ label: 'GitHub', href: 'https://github.com/guru-prasath-j/whatsapp-brain' }],
-  },
 ];
 
-export const pocketmind = { repo: 'https://github.com/guru-prasath-j/pocketmind' };
+/** Second spotlight on the home page: the package other developers actually run. */
+export const spotlight = {
+  name: 'flutter_accessibility_scanner',
+  status: 'Live' as Status,
+  registry: 'pub.dev · v1.2.0 · 160/160 pub points',
+  line: 'Accessibility bugs, caught while you build.',
+  meta: 'It walks the live render tree and reports WCAG 2.1 failures — missing labels, unlabeled images, low contrast, small tap targets, unfocusable controls — each with a severity, a location and a concrete fix. Use it as an in-app overlay, a one-line widget-test check, or a JSON/Markdown report that gates CI.',
+  stats: [
+    { value: '15k', label: 'downloads / month' },
+    { value: '160', label: 'pub points' },
+    { value: '6', label: 'WCAG checks' },
+  ],
+  links: [
+    { label: 'pub.dev', href: 'https://pub.dev/packages/flutter_accessibility_scanner' },
+    { label: 'GitHub', href: 'https://github.com/guru-prasath-j/flutter_accessibility_scanner' },
+  ],
+  article: 'https://medium.com/@guruprasathjay/i-shipped-a-flutter-package-forgot-about-it-and-a-year-later-it-had-12-000-downloads-a-month-61bfbbe8774e',
+};
 
 export const writing = [
   {

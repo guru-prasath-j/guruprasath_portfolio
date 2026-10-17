@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { builds, caseStudy, featured, isTodo, journey, lab, site, writing } from '@/lib/content';
+import { builds, caseStudy, featured, isTodo, journey, lab, site, spotlight, writing } from '@/lib/content';
 
 const STATUSES = ['Live', 'Prototype', 'In progress', 'Research'];
 const projects = [featured, ...lab, ...builds];
@@ -18,7 +18,7 @@ describe('content', () => {
   });
 
   it('links are https, mailto, site-relative, or a TODO', () => {
-    const hrefs = [site.github, site.linkedin, site.resume, ...projects.flatMap((p) => p.links.map((l) => l.href))];
+    const hrefs = [site.github, site.linkedin, site.resume, ...projects.flatMap((p) => p.links.map((l) => l.href)), ...spotlight.links.map((l) => l.href), spotlight.article];
     for (const h of hrefs) expect(isTodo(h) || /^(https:\/\/|mailto:|\/)/.test(h)).toBe(true);
   });
 
