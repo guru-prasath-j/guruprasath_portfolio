@@ -191,10 +191,10 @@ export const writing = [
 ];
 
 export const numbers = [
+  { value: '9', unit: '+', label: 'Mobile apps built and shipped to the Play Store and App Store' },
   { value: '−66', unit: '%', label: 'APK size on a production health app — 68 MB down to 23 MB' },
   { value: '15k', unit: '/mo', label: 'Downloads of flutter_accessibility_scanner on pub.dev' },
   { value: '4', unit: '×160', label: 'Packages on pub.dev, every one at the maximum 160 pub points' },
-  { value: '−85', unit: '%', label: 'Sync failures after an offline-first rebuild at Nuvo.ai' },
 ];
 
 export type StepKind = 'Education' | 'Work' | 'Next';
