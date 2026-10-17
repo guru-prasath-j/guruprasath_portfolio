@@ -32,6 +32,7 @@ export const site = {
   url: 'https://guru-prasath-j.github.io/guruprasath_portfolio',
   email: 'guruprasathjay@gmail.com',
   github: 'https://github.com/guru-prasath-j',
+  repo: 'https://github.com/guru-prasath-j/guruprasath_portfolio',
   linkedin: 'https://www.linkedin.com/in/guruprasath-j/',
   // Drop your PDF into /public with this exact name.
   resume: '/Guruprasath_J_Resume.pdf',

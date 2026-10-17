@@ -14,6 +14,7 @@ import SkillCube from '@/components/SkillCube';
 import CountUp from '@/components/CountUp';
 import Magnetic from '@/components/Magnetic';
 import JourneyStairs from '@/components/JourneyStairs';
+import DemoProvider, { WatchDemo } from '@/components/DemoTheatre';
 import { builds, featured, lab, numbers, site, spotlight, stack, writing } from '@/lib/content';
 import { asset } from '@/lib/path';
 
@@ -22,7 +23,7 @@ const btnGhost = 'rounded-xl border border-line2 px-6 py-3.5 font-medium no-unde
 
 export default function Home() {
   return (
-    <>
+    <DemoProvider>
       <Nav />
       <main id="main">
         {/* ---------- Hero ---------- */}
@@ -36,7 +37,7 @@ export default function Home() {
             </p>
             <LitHeadline id="hero-h" />
             <p className="word m-0 max-w-[520px] text-lg leading-relaxed text-muted sm:text-[19px]" style={{ animationDelay: '.75s' }}>
-              {site.name} — {site.description.charAt(0).toLowerCase() + site.description.slice(1)}
+              {site.name} — {site.description}
             </p>
             <div className="word flex flex-wrap gap-3" style={{ animationDelay: '.9s' }}>
               <Magnetic><a href="#work" className={`inline-block ${btnPrimary}`}>See the work ↓</a></Magnetic>
@@ -72,6 +73,7 @@ export default function Home() {
               <p className="m-0 text-muted">{featured.meta}</p>
               <div className="mt-2 flex flex-wrap gap-3">
                 <Magnetic><Link href="/work/on-device-rag/" className={`inline-block ${btnPrimary}`}>Read the case study →</Link></Magnetic>
+                <WatchDemo slug={featured.slug} />
                 {featured.links.map((l) => (
                   <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
                 ))}
@@ -107,6 +109,7 @@ export default function Home() {
               </dl>
               <div className="mt-1 flex flex-wrap gap-3">
                 <Magnetic><a href={spotlight.article} target="_blank" rel="noopener noreferrer" className={`inline-block ${btnPrimary}`}>Read the story →</a></Magnetic>
+                <WatchDemo slug="flutter-accessibility-scanner" />
                 {spotlight.links.map((l) => (
                   <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
                 ))}
@@ -141,7 +144,8 @@ export default function Home() {
                 <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]"><span className="sweep">{p.name}</span></h3>
                 <p className="m-0 text-lg font-medium leading-snug">{p.line}</p>
                 <p className="m-0 text-[15px] text-muted">{p.meta}</p>
-                <div className="mt-auto flex gap-5">
+                <div className="mt-auto flex flex-wrap items-center gap-5">
+                  <WatchDemo slug={p.slug} />
                   {p.links.map((l) => (
                     <SmartLink key={l.label} href={l.href} className="font-semibold text-accent no-underline hover:underline">{l.label} →</SmartLink>
                   ))}
@@ -158,7 +162,7 @@ export default function Home() {
             <h2 id="b-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
               Apps &amp; agents<span className="text-accent">.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">Native apps, full-stack AI products and agent experiments — each one on GitHub.</p>
+            <p className="m-0 max-w-[380px] text-muted">Native apps, full-stack AI products and agent experiments — each one on GitHub. Hit ▶ Watch demo to see one run.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {builds.map((p) => (
@@ -174,7 +178,8 @@ export default function Home() {
                     {p.tags.map((t) => <span key={t} className="rounded-md border border-line2 px-2.5 py-1 font-mono text-xs text-soft">{t}</span>)}
                   </div>
                 )}
-                <div className="mt-auto flex gap-5 pt-1">
+                <div className="mt-auto flex flex-wrap items-center gap-5 pt-1">
+                  <WatchDemo slug={p.slug} />
                   {p.links.map((l) => (
                     <SmartLink key={l.label} href={l.href} className="font-semibold text-accent no-underline hover:underline">{l.label} →</SmartLink>
                   ))}
@@ -263,6 +268,6 @@ export default function Home() {
         </section>
       </main>
       <Footer />
-    </>
+    </DemoProvider>
   );
 }

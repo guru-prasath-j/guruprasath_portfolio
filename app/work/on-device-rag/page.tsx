@@ -8,13 +8,21 @@ import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
 import { caseStudy as cs, featured, isTodo } from '@/lib/content';
 
+const DESC = 'Designing reusable, on-device retrieval infrastructure for Dart and Flutter.';
+
 export const metadata: Metadata = {
   title: 'on_device_rag — case study',
-  description: 'Designing reusable, on-device retrieval infrastructure for Dart and Flutter.',
+  description: DESC,
   alternates: { canonical: '/work/on-device-rag/' },
+  // Without these, shares of this page show the home page's title and link.
+  openGraph: { type: 'article', url: '/work/on-device-rag/', title: 'on_device_rag — case study', description: DESC },
+  twitter: { card: 'summary_large_image', title: 'on_device_rag — case study', description: DESC },
 };
 
-const SECTIONS = [
+// The evaluation section only appears once at least one metric has been measured.
+const HAS_METRICS = cs.metrics.some((m) => m.value !== null);
+
+const SECTIONS = ([
   ['problem', 'Problem'],
   ['constraints', 'Constraints'],
   ['implementation', 'Implementation'],
@@ -22,7 +30,8 @@ const SECTIONS = [
   ['reliability', 'Reliability'],
   ['evaluation', 'Evaluation'],
   ['next', 'Results & next'],
-] as const;
+] as const).filter(([id]) => HAS_METRICS || id !== 'evaluation');
+const num = (id: string) => SECTIONS.findIndex(([s]) => s === id) + 1;
 
 function Section({ id, n, title, children }: { id: string; n: number; title: string; children: React.ReactNode }) {
   return (
@@ -110,11 +119,11 @@ export default function CaseStudy() {
           </nav>
 
           <article className="flex min-w-0 max-w-[800px] flex-[999_1_560px] flex-col gap-20">
-            <Section id="problem" n={1} title="RAG shouldn’t need a server.">
+            <Section id="problem" n={num('problem')} title="RAG shouldn’t need a server.">
               <p className="m-0 text-soft">{cs.problem}</p>
             </Section>
 
-            <Section id="constraints" n={2} title="Four hard limits.">
+            <Section id="constraints" n={num('constraints')} title="Four hard limits.">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {cs.constraints.map((c) => (
                   <div key={c.title} className="lift rounded-[20px] border border-line bg-surface p-6">
@@ -125,7 +134,7 @@ export default function CaseStudy() {
               </div>
             </Section>
 
-            <Section id="implementation" n={3} title="What I built.">
+            <Section id="implementation" n={num('implementation')} title="What I built.">
               <Pending text={cs.implementation} />
               <ChunkSplit />
               <div className="overflow-hidden rounded-[18px] border border-line bg-surface" style={{ transform: 'perspective(1200px) rotateX(4deg)' }}>
@@ -137,7 +146,7 @@ export default function CaseStudy() {
               </div>
             </Section>
 
-            <Section id="tradeoffs" n={4} title="What I gave up, on purpose.">
+            <Section id="tradeoffs" n={num('tradeoffs')} title="What I gave up, on purpose.">
               <div className="flex flex-col gap-3">
                 {cs.tradeoffs.map((t) => (
                   <div key={t.title} className="lift grid grid-cols-1 gap-2 rounded-[18px] border border-line bg-surface px-6 py-5 sm:grid-cols-[240px_1fr] sm:gap-6">
@@ -148,11 +157,12 @@ export default function CaseStudy() {
               </div>
             </Section>
 
-            <Section id="reliability" n={5} title="When things go wrong.">
+            <Section id="reliability" n={num('reliability')} title="When things go wrong.">
               <Pending text={cs.reliability} />
             </Section>
 
-            <Section id="evaluation" n={6} title="Measured, not demoed.">
+            {HAS_METRICS && (
+            <Section id="evaluation" n={num('evaluation')} title="Measured, not demoed.">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {cs.metrics.map((m) => (
                   <div key={m.label} className={`rounded-[18px] p-5 ${m.value ? 'border border-line bg-surface' : 'border border-dashed border-[#3A3F57]'}`}>
@@ -163,8 +173,9 @@ export default function CaseStudy() {
               </div>
               <p className="m-0 text-sm text-[#6B7088]">Empty boxes stay empty until measured. Each number names its device and dataset.</p>
             </Section>
+            )}
 
-            <Section id="next" n={7} title="Shipped. What’s next.">
+            <Section id="next" n={num('next')} title="Shipped. What’s next.">
               <p className="m-0 text-soft">{cs.next}</p>
             </Section>
 

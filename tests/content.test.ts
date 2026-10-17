@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { builds, caseStudy, featured, isTodo, journey, lab, site, spotlight, writing } from '@/lib/content';
+import { demos } from '@/lib/demos';
 
 const STATUSES = ['Live', 'Prototype', 'In progress', 'Research'];
 const projects = [featured, ...lab, ...builds];
@@ -43,5 +44,25 @@ describe('content', () => {
     ];
     if (todos.length) console.info(`\n${todos.length} placeholder(s) left:\n- ${todos.join('\n- ')}`);
     expect(Array.isArray(todos)).toBe(true);
+  });
+});
+
+describe('demos', () => {
+  const slugs = new Set([featured.slug, 'flutter-accessibility-scanner', ...lab.map((p) => p.slug), ...builds.map((p) => p.slug)]);
+
+  it('every demo belongs to a project on the page', () => {
+    for (const d of demos) expect(slugs.has(d.slug), d.slug).toBe(true);
+  });
+
+  it('every project on the page has a demo', () => {
+    for (const s of slugs) expect(demos.some((d) => d.slug === s), s).toBe(true);
+  });
+
+  it('each demo has a two-line phrase and at least one scene with items', () => {
+    for (const d of demos) {
+      expect(d.phrase.every((l) => l.trim().length > 0)).toBe(true);
+      expect(d.scenes.length).toBeGreaterThan(0);
+      for (const sc of d.scenes) expect(sc.items.length).toBeGreaterThan(0);
+    }
   });
 });

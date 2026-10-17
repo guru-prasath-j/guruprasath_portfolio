@@ -168,3 +168,14 @@ a:active, button:active { transform: scale(.96); }
 }
 .stairs { transform: rotateX(56deg) rotateZ(-38deg) translate(-40px, 60px); animation: stairsfloat 9s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .stairs { animation: none !important; } }
+
+/* ---------- demo theatre ---------- */
+.demo-item { transition: opacity .45s cubic-bezier(.2,.7,.2,1), transform .45s cubic-bezier(.2,.7,.2,1); }
+@keyframes theatreIn { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+.theatre-in { animation: theatreIn .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes phraseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.phrase-in { animation: phraseIn .5s cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .demo-item { transition: none !important; }
+  .theatre-in, .phrase-in { animation: none !important; }
+}
