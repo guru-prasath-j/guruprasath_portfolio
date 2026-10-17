@@ -13,7 +13,7 @@ import SkillCube from '@/components/SkillCube';
 import CountUp from '@/components/CountUp';
 import Magnetic from '@/components/Magnetic';
 import JourneyStairs from '@/components/JourneyStairs';
-import { featured, lab, numbers, site, stack } from '@/lib/content';
+import { builds, featured, lab, numbers, pocketmind, site, stack, writing } from '@/lib/content';
 import { asset } from '@/lib/path';
 
 const btnPrimary = 'rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg no-underline transition-transform hover:-translate-y-0.5';
@@ -97,6 +97,7 @@ export default function Home() {
                 A quantized model and an on-device index, so questions about private documents never touch a server. Move your cursor to turn the phone.
               </p>
               <p className="m-0 font-mono text-xs text-faint">Illustrative replay of the prototype’s chat flow.</p>
+              <SmartLink href={pocketmind.repo} className="self-start font-semibold text-accent no-underline hover:underline">See the prototype on GitHub →</SmartLink>
             </div>
             <div className="min-w-0 flex-[1_1_420px]">
               <Phone3D />
@@ -110,7 +111,7 @@ export default function Home() {
             <h2 id="lab-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
               The lab<span className="text-accent">.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">Packages, tools and experiments. Move your cursor over a card.</p>
+            <p className="m-0 max-w-[380px] text-muted">Open-source packages and tools other developers install. Move your cursor over a card.</p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {lab.map((p, i) => (
@@ -118,7 +119,10 @@ export default function Home() {
               <TiltCard className="flex min-h-[300px] flex-1 flex-col gap-4 rounded-3xl border border-line bg-surface p-6 sm:p-8">
                 <div className="flex items-center justify-between">
                   <span aria-hidden="true" className="font-mono text-6xl font-medium leading-none text-[#1E2232]">{String(i + 1).padStart(2, '0')}</span>
-                  <StatusBadge status={p.status} />
+                  <span className="flex items-center gap-2.5">
+                    {p.registry && <span className="font-mono text-xs text-faint">{p.registry}</span>}
+                    <StatusBadge status={p.status} />
+                  </span>
                 </div>
                 <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]"><span className="sweep">{p.name}</span></h3>
                 <p className="m-0 text-lg font-medium leading-snug">{p.line}</p>
@@ -130,6 +134,38 @@ export default function Home() {
                 </div>
               </TiltCard>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ---------- Builds ---------- */}
+        <section id="builds" aria-labelledby="b-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
+          <div className="reveal mb-10 flex flex-wrap items-end justify-between gap-5 sm:mb-12">
+            <h2 id="b-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+              Apps &amp; agents<span className="text-accent">.</span>
+            </h2>
+            <p className="m-0 max-w-[380px] text-muted">Native apps, full-stack AI products and agent experiments — each one on GitHub.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {builds.map((p) => (
+              <article key={p.slug} aria-labelledby={`b-${p.slug}`} className="reveal lift flex flex-col gap-3.5 rounded-3xl border border-line bg-surface p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 id={`b-${p.slug}`} className="m-0 text-xl font-semibold tracking-[-0.02em]">{p.name}</h3>
+                  <StatusBadge status={p.status} />
+                </div>
+                <p className="m-0 font-medium leading-snug">{p.line}</p>
+                <p className="m-0 text-[15px] text-muted">{p.meta}</p>
+                {p.tags && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tags.map((t) => <span key={t} className="rounded-md border border-line2 px-2.5 py-1 font-mono text-xs text-soft">{t}</span>)}
+                  </div>
+                )}
+                <div className="mt-auto flex gap-5 pt-1">
+                  {p.links.map((l) => (
+                    <SmartLink key={l.label} href={l.href} className="font-semibold text-accent no-underline hover:underline">{l.label} →</SmartLink>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </section>
@@ -151,7 +187,7 @@ export default function Home() {
 
         {/* ---------- Numbers ---------- */}
         <section aria-label="Results" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
-          <div className="reveal grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="reveal grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {numbers.map((n) => (
               <div key={n.label} className="border-t border-line2 pt-6">
                 <div className="text-6xl font-semibold leading-none tracking-[-0.05em] sm:text-[72px]">
@@ -159,6 +195,28 @@ export default function Home() {
                 </div>
                 <p className="m-0 mt-2.5 text-muted">{n.label}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ---------- Writing ---------- */}
+        <section id="writing" aria-labelledby="w-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
+          <div className="reveal mb-10 flex flex-wrap items-end justify-between gap-5 sm:mb-12">
+            <h2 id="w-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+              Writing<span className="text-accent">.</span>
+            </h2>
+            <p className="m-0 max-w-[380px] text-muted">What I learned building the tools above, on Medium.</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {writing.map((w) => (
+              <a key={w.href} href={w.href} target="_blank" rel="noopener noreferrer" className="reveal lift group grid grid-cols-1 items-center gap-2 rounded-[22px] border border-line bg-surface p-6 no-underline sm:grid-cols-[1fr_auto] sm:gap-8 sm:p-8">
+                <span className="flex min-w-0 flex-col gap-1.5">
+                  <span className="font-mono text-xs text-faint">{w.date} · Medium</span>
+                  <span className="text-xl font-semibold leading-snug tracking-[-0.02em] sm:text-2xl">{w.title}</span>
+                  <span className="text-[15px] text-muted">{w.sub}</span>
+                </span>
+                <span aria-hidden="true" className="text-3xl text-accent transition-transform group-hover:translate-x-1">→</span>
+              </a>
             ))}
           </div>
         </section>

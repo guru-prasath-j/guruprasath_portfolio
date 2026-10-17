@@ -15,6 +15,8 @@ export default function Nav({ back = false }: { back?: boolean }) {
             <>
               <a href="#work" className="hidden rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF] sm:inline">Work</a>
               <a href="#lab" className="hidden rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF] sm:inline">Lab</a>
+              <a href="#builds" className="hidden rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF] md:inline">Apps</a>
+              <a href="#writing" className="hidden rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF] md:inline">Writing</a>
               <a href="#journey" className="hidden rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF] sm:inline">Journey</a>
             </>
           )}
