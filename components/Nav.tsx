@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { site } from '@/lib/content';
+import NavBrand from '@/components/NavBrand';
 
 const links = [
   { href: '#work', label: 'Work', show: 'sm:inline' },
@@ -11,18 +12,12 @@ const links = [
 
 export default function Nav({ back = false }: { back?: boolean }) {
   return (
-    <header className="relative z-10">
-      <nav aria-label="Primary" className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8">
-        <Link href="/" className="flex items-center gap-3 no-underline">
-          <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-cyan text-base font-bold tracking-tight text-bg">GP</span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-lg font-bold tracking-tight sm:text-xl">{site.name}</span>
-            <span className="font-mono text-[11px] text-faint">{site.role}</span>
-          </span>
-        </Link>
-        <div className="flex flex-wrap items-center gap-1 rounded-full border border-line bg-surface p-1.5 text-sm">
+    <header className="sticky top-0 z-30 border-b border-line/60 bg-[rgba(7,8,12,.78)] backdrop-blur-md">
+      <nav aria-label="Primary" className="mx-auto flex max-w-page items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-8 sm:py-4">
+        <NavBrand />
+        <div className="flex flex-none items-center gap-1 rounded-full border border-line bg-surface p-1.5 text-sm">
           {back ? (
-            <Link href="/#work" className="rounded-full px-4 py-2 no-underline hover:text-[#B7BEFF]">← All work</Link>
+            <Link href="/#work" aria-label="All work" className="whitespace-nowrap rounded-full px-3 py-2 no-underline hover:text-[#B7BEFF] sm:px-4">←<span className="hidden sm:inline"> All work</span></Link>
           ) : (
             <>
               {links.map((l) => (
@@ -31,7 +26,7 @@ export default function Nav({ back = false }: { back?: boolean }) {
               <Link href="/recruiter/" className="hidden rounded-full border border-line2 px-4 py-2 no-underline hover:border-accent sm:inline">Recruiter view</Link>
             </>
           )}
-          <a href={back ? `mailto:${site.email}` : '#contact'} className="rounded-full bg-ink px-4 py-2 font-semibold text-bg no-underline">Let’s talk</a>
+          <a href={back ? `mailto:${site.email}` : '#contact'} className="whitespace-nowrap rounded-full bg-ink px-4 py-2 font-semibold text-bg no-underline">Let’s talk</a>
         </div>
       </nav>
     </header>

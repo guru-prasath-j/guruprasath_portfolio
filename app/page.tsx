@@ -51,10 +51,6 @@ export default function Home() {
         <div aria-hidden="true" className="floor" />
         <section aria-labelledby="name-h" className="relative mx-auto flex max-w-page flex-wrap items-center gap-6 px-5 pb-10 pt-6 sm:px-8 lg:min-h-[720px]">
           <div className="relative z-10 flex min-w-0 flex-[1_1_520px] flex-col gap-6">
-            <p className="inline-flex items-center gap-2.5 self-start rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs text-muted">
-              <span className="pulse h-2 w-2 rounded-full bg-live" />
-              {site.availability} · {site.location}
-            </p>
             <div className="rise flex flex-col gap-2.5">
               <span className="font-mono text-[13px] tracking-[.16em] text-accent">HI, I’M</span>
               <h1 id="name-h" className="name-grad m-0 whitespace-nowrap text-[42px] font-bold leading-[0.95] tracking-[-0.05em] min-[400px]:text-[46px] sm:text-[72px] lg:text-[84px]">{site.name}</h1>

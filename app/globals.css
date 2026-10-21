@@ -205,3 +205,9 @@ html:has(.plain-page) { background: #F6F6F9; }
   html, body { background: #FFFFFF !important; }
   .cursor-part, canvas { display: none !important; }
 }
+
+/* ---------- nav brand swap ---------- */
+@keyframes brandIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.brand-in { animation: brandIn .35s cubic-bezier(.2,.7,.2,1) both; }
+html { scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) { .brand-in { animation: none !important; } }
