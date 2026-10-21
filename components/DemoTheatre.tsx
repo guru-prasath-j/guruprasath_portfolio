@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import Phone3D from '@/components/Phone3D';
 import DemoScreen from '@/components/DemoScreen';
+import DuoDevice from '@/components/DuoDevice';
 import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
 import { demos } from '@/lib/demos';
@@ -195,9 +196,13 @@ function Theatre({ slug, onPick, onClose }: { slug: string; onPick: (s: string) 
 
           {/* the reusable phone */}
           <div role="img" aria-label={`${meta?.name} demo, step ${scene + 1} of ${d.scenes.length}: ${sc.caption}`}>
-            <Phone3D>
-              <DemoScreen scene={sc} shown={shown} offline={offline} />
-            </Phone3D>
+            {d.device === 'duo' ? (
+              <DuoDevice scene={scene} />
+            ) : (
+              <Phone3D>
+                <DemoScreen scene={sc} shown={shown} offline={offline} />
+              </Phone3D>
+            )}
           </div>
 
           {/* narration */}

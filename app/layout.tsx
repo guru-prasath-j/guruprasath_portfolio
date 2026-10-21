@@ -15,8 +15,9 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.role}`,
     description: site.description,
     siteName: site.name,
+    images: [{ url: `${site.url}/og.png`, width: 1200, height: 630, alt: `${site.name}, ${site.role}` }],
   },
-  twitter: { card: 'summary_large_image', title: `${site.name} — ${site.role}`, description: site.description },
+  twitter: { card: 'summary_large_image', title: `${site.name} — ${site.role}`, description: site.description, images: [`${site.url}/og.png`] },
 };
 
 export const viewport: Viewport = { themeColor: '#07080C', width: 'device-width', initialScale: 1 };

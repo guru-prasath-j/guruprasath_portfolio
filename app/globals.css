@@ -179,3 +179,29 @@ a:active, button:active { transform: scale(.96); }
   .demo-item { transition: none !important; }
   .theatre-in, .phrase-in { animation: none !important; }
 }
+
+/* ---------- load-in for blocks (keeps their own display, unlike .word) ---------- */
+.rise { opacity: 0; animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; }
+
+/* ---------- dual-screen device ---------- */
+.duo-move, .duo-swing { transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+
+/* ---------- phone contact bar ---------- */
+.contact-bar { transition: transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s; }
+
+/* ---------- name gradient ---------- */
+.name-grad { background: linear-gradient(90deg, #FFFFFF 0%, #E9EAF0 45%, #8C97FF 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none !important; opacity: 1 !important; }
+  .duo-move, .duo-swing, .contact-bar { transition: none !important; }
+}
+
+/* ---------- recruiter view: plain page, native cursor, prints cleanly ---------- */
+body:has(.plain-page) .cursor-part { display: none !important; }
+html.has-cursor:has(.plain-page), html.has-cursor:has(.plain-page) * { cursor: auto !important; }
+html:has(.plain-page) { background: #F6F6F9; }
+@media print {
+  html, body { background: #FFFFFF !important; }
+  .cursor-part, canvas { display: none !important; }
+}

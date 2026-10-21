@@ -45,7 +45,7 @@ export default function Phone3D({ children }: { children: ReactNode }) {
         <div className={face} style={{ width: W - 40, height: D, margin: `${-D / 2}px 0 0 ${-(W - 40) / 2}px`, background: '#33384F', transform: `rotateX(90deg) translateZ(${H / 2 - 2}px)` }} />
         <div className={face} style={{ width: W - 40, height: D, margin: `${-D / 2}px 0 0 ${-(W - 40) / 2}px`, background: '#1E2130', transform: `rotateX(-90deg) translateZ(${H / 2 - 2}px)` }} />
         {/* back */}
-        <div className="absolute inset-0 rounded-[44px] border border-line2 bg-[#141726]" style={{ transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
+        <div className="absolute inset-0 rounded-[44px] border border-line2 bg-[#141726]" style={{ transform: `rotateY(180deg) translateZ(${D / 2}px)`, backfaceVisibility: 'hidden' }}>
           <div className="absolute left-6 top-6 grid grid-cols-2 gap-2 rounded-2xl bg-[#0D0F16] p-2.5">
             <span className="h-7 w-7 rounded-full border border-line2 bg-bg" /><span className="h-7 w-7 rounded-full border border-line2 bg-bg" />
             <span className="h-7 w-7 rounded-full border border-line2 bg-bg" /><span className="h-3 w-3 self-center justify-self-center rounded-full bg-[#2A2E44]" />
@@ -54,7 +54,7 @@ export default function Phone3D({ children }: { children: ReactNode }) {
         {/* front */}
         <div
           className="absolute inset-0 overflow-hidden rounded-[44px] border-[10px] border-[#1A1D2B] bg-[#F1F2F7] text-bg shadow-[0_40px_80px_-30px_rgba(140,151,255,.45)]"
-          style={{ transform: `translateZ(${D / 2}px)` }}
+          style={{ transform: `translateZ(${D / 2}px)`, backfaceVisibility: 'hidden' }}
         >
           <div className="mx-auto mt-2 h-6 w-24 rounded-full bg-[#07080C]" />
           {children}

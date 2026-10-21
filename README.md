@@ -48,6 +48,21 @@ BASE_PATH=/guruprasath_portfolio npm run build
 npx serve out   # then open the URL it prints + /guruprasath_portfolio/
 ```
 
+## Recruiter-friendly extras
+
+- **Hire card** under the hero: roles, experience, location, notice period, proof, and resume / email / LinkedIn buttons. Edit `hire` in `lib/content.ts`.
+- **Recruiter view** at `/recruiter/`: one plain, printable page with no animation.
+- **Skills, with proof**: each skill linked to where it's used (`skillsProof` in `lib/content.ts`).
+- **Phone contact bar**: Email + Resume pinned to the bottom on phones once you scroll past the hero.
+- **Link preview**: `public/og.png` (1200 × 630) is used for Open Graph and Twitter cards on every page.
+
+## Live pub.dev stats
+
+`npm run build` first runs `scripts/fetch-stats.mjs`, which reads the 30-day download count from
+`https://pub.dev/api/packages/<name>/score` and saves it to `lib/stats.json`. If pub.dev can't be reached,
+the last saved number is kept. The deploy workflow also rebuilds once a day, so the number stays current.
+Run `npm run fetch-stats` to refresh it locally.
+
 ## Structure
 
 ```

@@ -6,7 +6,7 @@ import Pipeline from '@/components/Pipeline';
 import ChunkSplit from '@/components/ChunkSplit';
 import StatusBadge from '@/components/StatusBadge';
 import SmartLink from '@/components/SmartLink';
-import { caseStudy as cs, featured, isTodo } from '@/lib/content';
+import { caseStudy as cs, featured, isTodo, site } from '@/lib/content';
 
 const DESC = 'Designing reusable, on-device retrieval infrastructure for Dart and Flutter.';
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/work/on-device-rag/' },
   // Without these, shares of this page show the home page's title and link.
-  openGraph: { type: 'article', url: '/work/on-device-rag/', title: 'on_device_rag — case study', description: DESC },
+  openGraph: { type: 'article', url: '/work/on-device-rag/', title: 'on_device_rag — case study', description: DESC, images: [{ url: `${site.url}/og.png`, width: 1200, height: 630 }] },
   twitter: { card: 'summary_large_image', title: 'on_device_rag — case study', description: DESC },
 };
 

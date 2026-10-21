@@ -15,11 +15,31 @@ import CountUp from '@/components/CountUp';
 import Magnetic from '@/components/Magnetic';
 import JourneyStairs from '@/components/JourneyStairs';
 import DemoProvider, { WatchDemo } from '@/components/DemoTheatre';
+import HireCard from '@/components/HireCard';
+import SkillsProof from '@/components/SkillsProof';
+import ContactBar from '@/components/ContactBar';
 import { builds, featured, lab, numbers, site, spotlight, stack, writing } from '@/lib/content';
 import { asset } from '@/lib/path';
 
 const btnPrimary = 'rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg no-underline transition-transform hover:-translate-y-0.5';
 const btnGhost = 'rounded-xl border border-line2 px-6 py-3.5 font-medium no-underline transition-colors hover:border-accent';
+const textLink = 'font-semibold text-accent no-underline hover:underline';
+
+/** Package names break after underscores, never mid-word. */
+function Pkg({ name }: { name: string }) {
+  const parts = name.split('_');
+  return <>{parts.map((p, i) => <span key={i}>{p}{i < parts.length - 1 && <>_<wbr /></>}</span>)}</>;
+}
+
+/** "also on pub.dev as flutter_…" for packages published under two names. */
+function Alias({ name }: { name?: string }) {
+  if (!name) return null;
+  return (
+    <span className="font-mono text-xs text-faint">
+      also on pub.dev as <a href={`https://pub.dev/packages/${name}`} target="_blank" rel="noopener noreferrer" className="text-soft">{name}</a>
+    </span>
+  );
+}
 
 export default function Home() {
   return (
@@ -29,17 +49,22 @@ export default function Home() {
         {/* ---------- Hero ---------- */}
         <div className="relative overflow-hidden">
         <div aria-hidden="true" className="floor" />
-        <section aria-labelledby="hero-h" className="relative mx-auto flex max-w-page flex-wrap items-center gap-6 px-5 pb-10 pt-6 sm:px-8 lg:min-h-[760px]">
-          <div className="relative z-10 flex min-w-0 flex-[1_1_520px] flex-col gap-7">
+        <section aria-labelledby="name-h" className="relative mx-auto flex max-w-page flex-wrap items-center gap-6 px-5 pb-10 pt-6 sm:px-8 lg:min-h-[720px]">
+          <div className="relative z-10 flex min-w-0 flex-[1_1_520px] flex-col gap-6">
             <p className="inline-flex items-center gap-2.5 self-start rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs text-muted">
               <span className="pulse h-2 w-2 rounded-full bg-live" />
               {site.availability} · {site.location}
             </p>
+            <div className="rise flex flex-col gap-2.5">
+              <span className="font-mono text-[13px] tracking-[.16em] text-accent">HI, I’M</span>
+              <h1 id="name-h" className="name-grad m-0 whitespace-nowrap text-[42px] font-bold leading-[0.95] tracking-[-0.05em] min-[400px]:text-[46px] sm:text-[72px] lg:text-[84px]">{site.name}</h1>
+              <span className="text-lg font-medium text-soft sm:text-xl">{site.role} <span className="text-dim">·</span> Flutter <span className="text-dim">·</span> On-device AI</span>
+            </div>
             <LitHeadline id="hero-h" />
-            <p className="word m-0 max-w-[520px] text-lg leading-relaxed text-muted sm:text-[19px]" style={{ animationDelay: '.75s' }}>
-              {site.name} — {site.description}
+            <p className="rise m-0 max-w-[520px] text-lg leading-relaxed text-muted sm:text-[19px]" style={{ animationDelay: '.75s' }}>
+              {site.description.replace(/^AI Mobile Engineer building/, 'Building')}
             </p>
-            <div className="word flex flex-wrap gap-3" style={{ animationDelay: '.9s' }}>
+            <div className="rise flex flex-wrap gap-3" style={{ animationDelay: '.9s' }}>
               <Magnetic><a href="#work" className={`inline-block ${btnPrimary}`}>See the work ↓</a></Magnetic>
               <a href={asset(site.resume)} className={btnGhost}>Resume</a>
               <a href={site.github} className={btnGhost} target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -51,74 +76,87 @@ export default function Home() {
         </section>
         </div>
 
+        <HireCard />
+
         <Marquee items={stack} />
 
-        {/* ---------- Featured ---------- */}
+        {/* ---------- Featured builds: two projects, alternating sides ---------- */}
         <section id="work" aria-labelledby="work-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
           <div className="reveal mb-10 flex flex-wrap items-end justify-between gap-5 sm:mb-14">
             <h2 id="work-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
-              Featured<br /><span className="text-dim">build.</span>
+              Featured<br /><span className="text-dim">builds.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">The stack breathes on its own. Hover it and it pulls fully apart — watch the top-5 matches rise from the vector store to the screen.</p>
+            <p className="m-0 max-w-[400px] text-muted">Two projects I lead with: an on-device RAG engine, and an accessibility scanner other developers ship in their apps.</p>
           </div>
 
-          <article aria-labelledby="p1" className="reveal flex flex-wrap items-center gap-10 overflow-hidden rounded-[28px] border border-line bg-surface p-6 sm:p-12">
-            <div className="flex min-w-0 flex-[1_1_400px] flex-col gap-4">
-              <div className="flex items-center gap-2.5">
-                <StatusBadge status={featured.status} />
-                <span className="font-mono text-xs text-faint">{featured.registry}</span>
+          <div className="flex flex-col gap-7">
+            <article aria-labelledby="p1" className="reveal flex flex-wrap items-center gap-10 overflow-hidden rounded-[28px] border border-line bg-surface p-5 sm:p-12">
+              <div className="flex min-w-0 flex-[1_1_400px] flex-col gap-4">
+                <div className="flex items-baseline gap-3.5">
+                  <span className="font-mono text-4xl font-medium leading-none text-accent sm:text-[44px]">01</span>
+                  <span className="font-mono text-xs tracking-[.06em] text-faint">/ 02 · ON-DEVICE RAG ENGINE</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <StatusBadge status={featured.status} />
+                  <span className="font-mono text-xs text-faint">{featured.registry}</span>
+                </div>
+                <h3 id="p1" className="m-0 break-words font-mono text-3xl font-medium tracking-[-0.03em] sm:text-[40px]"><Pkg name={featured.name} /></h3>
+                <Alias name={featured.alias} />
+                <p className="m-0 text-xl font-medium leading-snug sm:text-[22px]">{featured.line}</p>
+                <p className="m-0 text-muted">{featured.meta}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <Magnetic><Link href="/work/on-device-rag/" className={`inline-block ${btnPrimary}`}>Read the case study →</Link></Magnetic>
+                  <WatchDemo slug={featured.slug} />
+                </div>
+                <div className="flex flex-wrap gap-5">
+                  {featured.links.map((l) => (
+                    <SmartLink key={l.href} href={l.href} className={textLink}>{l.label} →</SmartLink>
+                  ))}
+                </div>
               </div>
-              <h3 id="p1" className="m-0 font-mono text-3xl font-medium tracking-[-0.03em] sm:text-[40px]">{featured.name}</h3>
-              <p className="m-0 text-xl font-medium leading-snug sm:text-[22px]">{featured.line}</p>
-              <p className="m-0 text-muted">{featured.meta}</p>
-              <div className="mt-2 flex flex-wrap gap-3">
-                <Magnetic><Link href="/work/on-device-rag/" className={`inline-block ${btnPrimary}`}>Read the case study →</Link></Magnetic>
-                <WatchDemo slug={featured.slug} />
-                {featured.links.map((l) => (
-                  <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
-                ))}
+              <div className="min-w-0 flex-[1_1_420px]">
+                <ExplodedStack />
               </div>
-            </div>
-            <div className="min-w-0 flex-[1_1_420px]">
-              <ExplodedStack />
-            </div>
-          </article>
-        </section>
+            </article>
 
-        {/* ---------- Spotlight: accessibility scanner ---------- */}
-        <section aria-labelledby="phone-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
-          <div className="flex flex-wrap items-center gap-10">
-            <div className="reveal flex min-w-0 flex-[1_1_380px] flex-col gap-5">
-              <div className="flex items-center gap-2.5">
-                <StatusBadge status={spotlight.status} />
-                <span className="font-mono text-xs text-faint">{spotlight.registry}</span>
+            <article aria-labelledby="p2" className="reveal flex flex-wrap items-center gap-10 overflow-hidden rounded-[28px] border border-line bg-surface p-5 sm:p-12">
+              <div className="order-2 min-w-0 flex-[1_1_420px] lg:order-1">
+                <Phone3D><ScannerScreen /></Phone3D>
               </div>
-              <h2 id="phone-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
-                Used in other<br /><span className="text-dim">people’s apps.</span>
-              </h2>
-              <p className="m-0 font-mono text-base text-soft sm:text-lg">{spotlight.name}</p>
-              <p className="m-0 max-w-[520px] text-xl font-medium leading-snug">{spotlight.line}</p>
-              <p className="m-0 max-w-[520px] text-muted">{spotlight.meta}</p>
-              <dl className="m-0 grid max-w-[520px] grid-cols-3 gap-4">
-                {spotlight.stats.map((st) => (
-                  <div key={st.label} className="flex flex-col-reverse border-t border-line2 pt-3">
-                    <dt className="text-sm text-muted">{st.label}</dt>
-                    <dd className="m-0 text-4xl font-semibold tracking-[-0.04em]"><CountUp value={st.value} /></dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-1 flex flex-wrap gap-3">
-                <Magnetic><a href={spotlight.article} target="_blank" rel="noopener noreferrer" className={`inline-block ${btnPrimary}`}>Read the story →</a></Magnetic>
-                <WatchDemo slug="flutter-accessibility-scanner" />
-                {spotlight.links.map((l) => (
-                  <SmartLink key={l.href} href={l.href} className={btnGhost}>{l.label}</SmartLink>
-                ))}
+              <div className="order-1 flex min-w-0 flex-[1_1_400px] flex-col gap-4 lg:order-2">
+                <div className="flex items-baseline gap-3.5">
+                  <span className="font-mono text-4xl font-medium leading-none text-accent sm:text-[44px]">02</span>
+                  <span className="font-mono text-xs tracking-[.06em] text-faint">/ 02 · ACCESSIBILITY SCANNER</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <StatusBadge status={spotlight.status} />
+                  <span className="font-mono text-xs text-faint">{spotlight.registry}</span>
+                </div>
+                <h3 id="p2" className="m-0 font-mono text-[24px] font-medium tracking-[-0.03em] sm:text-[36px]"><Pkg name={spotlight.name} /></h3>
+                <p className="m-0 text-xl font-medium leading-snug sm:text-[22px]">Used in other people’s apps. <span className="text-muted">{spotlight.line}</span></p>
+                <p className="m-0 text-muted">{spotlight.meta}</p>
+                <dl className="m-0 grid grid-cols-3 gap-4">
+                  {spotlight.stats.map((st) => (
+                    <div key={st.label} className="flex flex-col-reverse border-t border-line2 pt-3">
+                      <dt className="flex items-center gap-1.5 text-sm text-muted">
+                        {'live' in st && st.live && <span className="pulse h-1.5 w-1.5 flex-none rounded-full bg-live" />}{st.label}
+                      </dt>
+                      <dd className="m-0 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl"><CountUp value={st.value} /></dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mt-1 flex flex-wrap items-center gap-3">
+                  <Magnetic><a href={spotlight.article} target="_blank" rel="noopener noreferrer" className={`inline-block ${btnPrimary}`}>Read the story →</a></Magnetic>
+                  <WatchDemo slug="flutter-accessibility-scanner" />
+                </div>
+                <div className="flex flex-wrap gap-5">
+                  {spotlight.links.map((l) => (
+                    <SmartLink key={l.href} href={l.href} className={textLink}>{l.label} →</SmartLink>
+                  ))}
+                </div>
+                <p className="m-0 font-mono text-xs text-faint">Download count read live from pub.dev. The phone replays the in-app overlay.</p>
               </div>
-              <p className="m-0 font-mono text-xs text-faint">Illustrative replay of the in-app overlay. Move your cursor to turn the phone.</p>
-            </div>
-            <div className="min-w-0 flex-[1_1_420px]">
-              <Phone3D><ScannerScreen /></Phone3D>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -126,9 +164,9 @@ export default function Home() {
         <section id="lab" aria-labelledby="lab-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
           <div className="reveal mb-10 flex flex-wrap items-end justify-between gap-5 sm:mb-12">
             <h2 id="lab-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
-              The lab<span className="text-accent">.</span>
+              Open source<span className="text-accent">.</span><br /><span className="text-dim">Published packages.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">Open-source packages and tools other developers install. Move your cursor over a card.</p>
+            <p className="m-0 max-w-[400px] text-muted">Packages I publish and maintain on pub.dev and PyPI, free for any developer to install. Move your cursor over a card.</p>
           </div>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {lab.map((p, i) => (
@@ -141,10 +179,13 @@ export default function Home() {
                     <StatusBadge status={p.status} />
                   </span>
                 </div>
-                <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]"><span className="sweep">{p.name}</span></h3>
+                <div className="flex flex-col gap-1">
+                  <h3 className="m-0 break-words font-mono text-xl font-medium sm:text-[22px]"><span className="sweep"><Pkg name={p.name} /></span></h3>
+                  <Alias name={p.alias} />
+                </div>
                 <p className="m-0 text-lg font-medium leading-snug">{p.line}</p>
                 <p className="m-0 text-[15px] text-muted">{p.meta}</p>
-                <div className="mt-auto flex flex-wrap items-center gap-5">
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3">
                   <WatchDemo slug={p.slug} />
                   {p.links.map((l) => (
                     <SmartLink key={l.label} href={l.href} className="font-semibold text-accent no-underline hover:underline">{l.label} →</SmartLink>
@@ -178,7 +219,7 @@ export default function Home() {
                     {p.tags.map((t) => <span key={t} className="rounded-md border border-line2 px-2.5 py-1 font-mono text-xs text-soft">{t}</span>)}
                   </div>
                 )}
-                <div className="mt-auto flex flex-wrap items-center gap-5 pt-1">
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
                   <WatchDemo slug={p.slug} />
                   {p.links.map((l) => (
                     <SmartLink key={l.label} href={l.href} className="font-semibold text-accent no-underline hover:underline">{l.label} →</SmartLink>
@@ -187,6 +228,17 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </section>
+
+        {/* ---------- Skills, with proof ---------- */}
+        <section id="skills" aria-labelledby="s-h" className="mx-auto max-w-page px-5 pt-24 sm:px-8 sm:pt-36">
+          <div className="reveal mb-10 flex flex-wrap items-end justify-between gap-5 sm:mb-12">
+            <h2 id="s-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
+              Skills<span className="text-accent">,</span><br /><span className="text-dim">with proof.</span>
+            </h2>
+            <p className="m-0 max-w-[400px] text-muted">Each skill next to where I used it, so you can match it against your job description.</p>
+          </div>
+          <SkillsProof />
         </section>
 
         {/* ---------- Toolkit ---------- */}
@@ -209,10 +261,15 @@ export default function Home() {
           <div className="reveal grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {numbers.map((n) => (
               <div key={n.label} className="border-t border-line2 pt-6">
-                <div className="text-6xl font-semibold leading-none tracking-[-0.05em] sm:text-[72px]">
-                  <CountUp value={n.value} /><span className="text-accent">{n.unit}</span>
+                <div className="whitespace-nowrap text-[52px] font-semibold leading-none tracking-[-0.05em] xl:text-[60px]">
+                  <CountUp value={n.value} /><span className="ml-0.5 text-[0.5em] tracking-[-0.02em] text-accent">{n.unit}</span>
                 </div>
-                <p className="m-0 mt-2.5 text-muted">{n.label}</p>
+                <p className="m-0 mt-2.5 text-muted">
+                  {n.label}
+                  {'live' in n && n.live && (
+                    <span className="ml-2 inline-flex items-center gap-1.5 font-mono text-[11px] text-live"><span className="pulse h-1.5 w-1.5 rounded-full bg-live" />live from pub.dev</span>
+                  )}
+                </p>
               </div>
             ))}
           </div>
@@ -246,7 +303,7 @@ export default function Home() {
             <h2 id="j-h" className="m-0 text-[40px] font-semibold leading-none tracking-[-0.04em] sm:text-[64px]">
               Journey<span className="text-accent">.</span><br /><span className="text-dim">One step at a time.</span>
             </h2>
-            <p className="m-0 max-w-[380px] text-muted">Each step is a stage of the climb. Pick one to see what I did there — the open step at the top is the next one.</p>
+            <p className="m-0 max-w-[380px] text-muted">Each step is a stage of the climb. Pick one to see what I did there.</p>
           </div>
           <JourneyStairs />
         </section>
@@ -268,6 +325,7 @@ export default function Home() {
         </section>
       </main>
       <Footer />
+      <ContactBar />
     </DemoProvider>
   );
 }

@@ -1,3 +1,5 @@
+import { formatCount, liveDownloads } from '@/lib/live';
+
 // Everything a visitor reads lives here. Edit this file, not the components.
 // Values wrapped in TODO() are placeholders: `npm test` lists them so nothing ships half-filled by accident.
 
@@ -21,6 +23,8 @@ export interface Project {
   links: Link[];
   /** Short stack chips, shown on build cards. */
   tags?: string[];
+  /** The same package published under a second pub.dev name. */
+  alias?: string;
 }
 
 export const site = {
@@ -41,10 +45,37 @@ export const site = {
     'AI Mobile Engineer building on-device RAG, quantized LLMs and the Flutter and Dart infrastructure that makes private, offline AI feel instant.',
 };
 
+// Read from pub.dev at build time (scripts/fetch-stats.mjs); falls back to the last saved value.
+export const scannerDownloads = formatCount(liveDownloads('flutter_accessibility_scanner'));
+
+/** The one-minute version for recruiters: shown under the hero and on /recruiter. */
+export const hire = {
+  roles: 'Flutter Developer · Mobile Engineer · AI Mobile Engineer · GenAI Engineer',
+  experience: '2+ years shipping Android & iOS apps with Flutter',
+  location: 'Bengaluru · open to remote and relocation (Dubai, Singapore)',
+  notice: '30 days',
+  proof: `9+ apps on the stores · 4 packages at 160/160 · ${scannerDownloads} downloads a month`,
+  summary:
+    'Mobile engineer with 2+ years shipping Flutter apps on Android and iOS, now focused on putting AI on the device: on-device speech and inference in production health apps, offline-first data, and open-source Dart packages used by other developers.',
+};
+
+/** Each skill next to where it is proven, so a recruiter can match it against a job description. */
+export const skillsProof = [
+  { skill: 'Flutter · Dart', covers: 'Android + iOS apps in production', proof: 'Nuvo.ai (HealthJini, Business Jini) · Thinq24', href: '#journey' },
+  { skill: 'Kotlin & Swift platform channels', covers: 'Native plugins behind Flutter', proof: 'Nuvo.ai · FeeLedger (Compose / SwiftUI)', href: '#builds' },
+  { skill: 'Offline-first architecture', covers: 'Durable outbox, cache, sync', proof: 'offline_cache_sync · HealthJini', href: '#lab' },
+  { skill: 'On-device AI', covers: 'TFLite, ML Kit, quantized LLMs', proof: 'Nuvo.ai voice AI · PocketMind', href: '#builds' },
+  { skill: 'RAG · LLM apps', covers: 'Chunking, embeddings, retrieval, eval', proof: 'on_device_rag · BrainSync AI · Self-healing RAG', href: '#work' },
+  { skill: 'Agents · MCP', covers: 'Tool-using agents, MCP servers', proof: 'AI code review agent · flutter-ios-bridge-mcp', href: '#builds' },
+  { skill: 'Accessibility · testing', covers: 'WCAG 2.1, widget tests, CI gates', proof: 'flutter_accessibility_scanner', href: '#work' },
+  { skill: 'CI/CD · releases', covers: 'GitLab CI, App Store & Play releases', proof: 'Nuvo.ai (−40% release time) · iOS builds without a Mac', href: '#journey' },
+];
+
 export const stack = ['Flutter', 'Dart', 'On-device RAG', 'TFLite', 'Quantized LLMs', 'LangGraph', 'FastAPI', 'MCP', 'Kotlin · Compose', 'Swift · SwiftUI'];
 
 export const featured: Project = {
   slug: 'on-device-rag',
+  alias: 'flutter_on_device_rag',
   name: 'on_device_rag',
   status: 'Live',
   registry: 'pub.dev · 160/160 pub points · sole author',
@@ -59,6 +90,7 @@ export const featured: Project = {
 export const lab: Project[] = [
   {
     slug: 'offline-cache-sync',
+  alias: 'flutter_offline_cache_sync',
     name: 'offline_cache_sync',
     status: 'Live',
     registry: 'pub.dev',
@@ -71,6 +103,7 @@ export const lab: Project[] = [
   },
   {
     slug: 'iphone-duo-adapt',
+  alias: 'flutter_iphone_duo_adapt',
     name: 'iphone_duo_adapt',
     status: 'Live',
     registry: 'pub.dev',
@@ -164,7 +197,7 @@ export const spotlight = {
   line: 'Accessibility bugs, caught while you build.',
   meta: 'It walks the live render tree and reports WCAG 2.1 failures — missing labels, unlabeled images, low contrast, small tap targets, unfocusable controls — each with a severity, a location and a concrete fix. Use it as an in-app overlay, a one-line widget-test check, or a JSON/Markdown report that gates CI.',
   stats: [
-    { value: '15k', label: 'downloads / month' },
+    { value: scannerDownloads, label: 'downloads · last 30 days', live: true },
     { value: '160', label: 'pub points' },
     { value: '6', label: 'WCAG checks' },
   ],
@@ -193,11 +226,11 @@ export const writing = [
 export const numbers = [
   { value: '9', unit: '+', label: 'Mobile apps published and maintained on the Play Store and App Store' },
   { value: '−66', unit: '%', label: 'APK size on a production health app — 68 MB down to 23 MB' },
-  { value: '15k', unit: '/mo', label: 'Downloads of flutter_accessibility_scanner on pub.dev' },
+  { value: scannerDownloads, unit: '/1M', label: 'Downloads of flutter_accessibility_scanner in the last 30 days', live: true },
   { value: '4', unit: '×160', label: 'Packages on pub.dev, every one at the maximum 160 pub points' },
 ];
 
-export type StepKind = 'Education' | 'Work' | 'Next';
+export type StepKind = 'Education' | 'Work';
 
 export interface Step {
   kind: StepKind;
@@ -251,21 +284,9 @@ export const journey: Step[] = [
     where: 'Bengaluru',
     title: 'SDE-1, Flutter & AI Mobile',
     org: 'Nuvo.ai · Meril Life Sciences',
-    body: 'Building the HealthJini doctor app and Business Jini for Meril Life Sciences’ digital arm: on-device voice AI for clinical workflows, offline-first data, native plugins and GitLab CI/CD that cut release time by 40%, for a user base of 10M+.',
+    body: 'Building the HealthJini doctor app and Business Jini for Meril Life Sciences’ digital arm: on-device voice AI for clinical workflows, offline-first data, native plugins and GitLab CI/CD that cut release time by 40%.',
     points: ['APK size 68 → 23 MB', 'On-device STT/TTS · 60%+ adoption in 2 months', 'Sync failures −85%', 'On-device inference −35% latency'],
     tags: ['Flutter', 'Riverpod', 'TFLite', 'ML Kit', 'Offline-first'],
-  },
-  {
-    kind: 'Next',
-    year: 'You?',
-    short: 'Your team',
-    when: 'Open now',
-    where: 'Bengaluru · remote · abroad',
-    title: 'AI Mobile Engineer',
-    org: 'Your team?',
-    body: 'The next step is open. I’m looking for a team building AI into mobile products — on-device models, RAG and the apps around them.',
-    points: ['On-device AI', 'RAG in production', 'Flutter at scale', 'Ship fast, measure'],
-    tags: ['Let’s talk'],
   },
 ];
 

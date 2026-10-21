@@ -42,7 +42,7 @@ export default function SkillCube({ size = 220 }: { size?: number }) {
         role="img"
         aria-label="A 3D cube with faces for Flutter, Dart, RAG, TFLite, FastAPI and MCP. Drag to spin it."
         className="cursor-grab touch-none select-none active:cursor-grabbing"
-        style={{ perspective: 1000, width: size * 1.8, height: size * 1.8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        style={{ perspective: 1000, width: '100%', maxWidth: size * 1.8, height: size * 1.8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         onPointerDown={(e) => { const s = st.current; s.drag = true; s.lx = e.clientX; s.ly = e.clientY; e.currentTarget.setPointerCapture(e.pointerId); }}
         onPointerMove={(e) => {
           const s = st.current; if (!s.drag) return;

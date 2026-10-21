@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { builds, caseStudy, featured, isTodo, journey, lab, site, spotlight, writing } from '@/lib/content';
 import { demos } from '@/lib/demos';
+import { formatCount, liveDownloads } from '@/lib/live';
 
 const STATUSES = ['Live', 'Prototype', 'In progress', 'Research'];
 const projects = [featured, ...lab, ...builds];
@@ -27,9 +28,21 @@ describe('content', () => {
     for (const w of writing) expect(w.href).toMatch(/^https:\/\//);
   });
 
-  it('journey has exactly one current role and ends on the open step', () => {
+  it('journey has exactly one current role, ending on it', () => {
     expect(journey.filter((r) => r.current)).toHaveLength(1);
-    expect(journey[journey.length - 1].kind).toBe('Next');
+    expect(journey[journey.length - 1].current).toBe(true);
+  });
+
+  it('no 10M+ user-base claim anywhere in the copy', () => {
+    expect(JSON.stringify(journey)).not.toMatch(/10M\+/);
+  });
+
+  it('formats download counts the way the site shows them', () => {
+    expect(formatCount(14400)).toBe('14.4k');
+    expect(formatCount(9800)).toBe('9.8k');
+    expect(formatCount(12000)).toBe('12k');
+    expect(formatCount(950)).toBe('950');
+    expect(liveDownloads('flutter_accessibility_scanner')).toBeGreaterThan(0);
   });
 
   it('no invented metrics: case-study numbers are either measured or null', () => {

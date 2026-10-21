@@ -25,13 +25,16 @@ export default function CustomCursor({ accent = '#8C97FF' }: { accent?: string }
     const bursts: Burst[] = [];
 
     const move = (e: PointerEvent) => {
+      if (!fine || e.pointerType !== 'mouse') return;
       x = e.clientX; y = e.clientY;
       if (dot.current && ring.current) { dot.current.style.opacity = mode && mode !== 'link' ? '0' : '1'; ring.current.style.opacity = '1'; }
     };
     const out = (e: PointerEvent) => {
+      if (!fine) return;
       if (!e.relatedTarget && dot.current && ring.current) { dot.current.style.opacity = '0'; ring.current.style.opacity = '0'; }
     };
     const over = (e: PointerEvent) => {
+      if (!fine || e.pointerType !== 'mouse') return;
       const t = e.target as Element | null;
       if (!t?.closest || !ring.current || !label.current || !dot.current) return;
       const tagged = t.closest('[data-cursor]');

@@ -7,7 +7,7 @@ const LINES = [['I', 'put', 'AI'], ['inside', 'the'], ['phone', 'in', 'your', 'h
 
 /** The hero headline with real extrusion. The cursor acts as a light: the depth falls away from it. */
 export default function LitHeadline({ id }: { id: string }) {
-  const ref = useRef<HTMLHeadingElement>(null);
+  const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -29,7 +29,7 @@ export default function LitHeadline({ id }: { id: string }) {
 
   let d = 0;
   return (
-    <h1 id={id} ref={ref} className="m-0 text-[46px] font-semibold leading-[0.98] tracking-[-0.045em] sm:text-[80px]">
+    <p id={id} ref={ref} className="m-0 text-[34px] font-semibold leading-[1.02] tracking-[-0.04em] text-muted sm:text-[56px]">
       {LINES.map((line, li) => (
         <span key={li} className="block">
           {line.map((w) => (
@@ -39,6 +39,6 @@ export default function LitHeadline({ id }: { id: string }) {
           ))}
         </span>
       ))}
-    </h1>
+    </p>
   );
 }

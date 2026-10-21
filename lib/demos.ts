@@ -32,6 +32,8 @@ export interface Demo {
   kind: string;
   phrase: [string, string];
   offline?: boolean;
+  /** Which device plays the demo: the 3D phone (default) or the dual-screen foldable. */
+  device?: 'phone' | 'duo';
   scenes: Scene[];
 }
 
@@ -111,19 +113,19 @@ export const demos: Demo[] = [
     ],
   },
   {
-    slug: 'iphone-duo-adapt', group: 'Packages', kind: 'Dart package',
+    slug: 'iphone-duo-adapt', group: 'Packages', kind: 'Dart package', device: 'duo',
     phrase: ['One app,', 'every fold.'],
     scenes: [
-      { caption: 'Folded: a normal phone layout with a bottom bar.', items: [
+      { caption: 'Folded: one screen and a normal phone layout, with a bottom bar.', items: [
         { kind: 'bar', title: 'Inbox', sub: '3 unread' },
         { kind: 'row', title: 'Design review', sub: 'Tomorrow, 10 am' },
         { kind: 'row', title: 'Release notes', sub: 'v1.4 is out' },
         { kind: 'tabs', text: 'Inbox · Search · Settings' },
       ] },
-      { caption: 'Unfolded: the bar becomes a side rail and the list gets a detail pane.', items: [
+      { caption: 'Unfolded: the bottom bar becomes a side rail, and the second screen becomes a detail pane.', items: [
         { kind: 'split', left: ['Inbox', 'Design review', 'Release notes'], right: ['Design review', 'Tomorrow, 10 am — bring the latest build.'] },
       ] },
-      { caption: 'Tabletop posture: content on top, controls below the hinge.', items: [
+      { caption: 'Book posture: content on one screen, controls on the other — nothing lands on the hinge.', items: [
         { kind: 'card', title: 'Design review', sub: 'Tomorrow, 10 am' },
         { kind: 'hinge' },
         { kind: 'btn', text: 'Reply' },
