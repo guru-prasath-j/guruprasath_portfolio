@@ -50,7 +50,7 @@ npx serve out   # then open the URL it prints + /guruprasath_portfolio/
 
 ## Recruiter-friendly extras
 
-- **Hire card** under the hero: roles, experience, location, notice period, proof, and resume / email / LinkedIn buttons. Edit `hire` in `lib/content.ts`.
+- **Hire card** under the hero: roles, experience, location, proof, and resume / email / LinkedIn buttons. Edit `hire` in `lib/content.ts`.
 - **Recruiter view** at `/recruiter/`: one plain, printable page with no animation.
 - **Skills, with proof**: each skill linked to where it's used (`skillsProof` in `lib/content.ts`).
 - **Phone contact bar**: Email + Resume pinned to the bottom on phones once you scroll past the hero.
