@@ -6,7 +6,6 @@ const facts = [
   ['Roles', hire.roles],
   ['Experience', hire.experience],
   ['Location', hire.location],
-  ['Notice period', hire.notice],
   ['Proof', hire.proof],
 ] as const;
 
@@ -26,7 +25,7 @@ export default function HireCard() {
             <Link href="/recruiter/" className="inline-flex min-h-11 items-center rounded-xl border border-line2 px-4 text-sm font-semibold no-underline hover:border-accent">Quick view →</Link>
           </div>
         </div>
-        <dl className="m-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+        <dl className="m-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map(([k, v], i) => (
             <div key={k} className={`flex flex-col gap-1.5 px-5 py-4 ${i ? 'border-t border-line sm:border-l lg:border-t-0' : ''} ${i === 2 ? 'sm:border-l-0 lg:border-l' : ''}`}>
               <dt className="font-mono text-[11px] uppercase tracking-[.08em] text-faint">{k}</dt>
