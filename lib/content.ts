@@ -53,7 +53,6 @@ export const hire = {
   roles: 'Flutter Developer · Mobile Engineer · AI Mobile Engineer · GenAI Engineer',
   experience: '2+ years shipping Android & iOS apps with Flutter',
   location: 'Bengaluru · open to remote and relocation (Dubai, Singapore)',
-  notice: '30 days',
   proof: `9+ apps on the stores · 4 packages at 160/160 · ${scannerDownloads} downloads a month`,
   summary:
     'Mobile engineer with 2+ years shipping Flutter apps on Android and iOS, now focused on putting AI on the device: on-device speech and inference in production health apps, offline-first data, and open-source Dart packages used by other developers.',
