@@ -30,7 +30,7 @@ function Item({ name, status, line, links }: { name: string; status: string; lin
 
 /** One plain page for recruiters: no animation, single column, prints cleanly. */
 export default function Recruiter() {
-  const facts = [['Roles', hire.roles], ['Experience', hire.experience], ['Location', hire.location], ['Notice period', hire.notice], ['Proof', hire.proof]];
+  const facts = [['Roles', hire.roles], ['Experience', hire.experience], ['Location', hire.location], ['Proof', hire.proof]];
   const roles = [...journey].reverse();
   return (
     <div className="plain-page min-h-screen bg-[#F6F6F9] text-[#14151A] print:bg-white">
